@@ -35,22 +35,7 @@ public class Tsp
                     continue;
                 // Otherwise tokenize the line
                 StringTokenizer tokenizedLine = new StringTokenizer(line, ",[]");
-                // Putting actual data into correct position in the array
-                cityName[cityNumber] = tokenizedLine.nextToken();
-                cityState[cityNumber] = (tokenizedLine.nextToken()).trim(); // trim()
-                                                                            // gets
-                                                                            // rid
-                                                                            // of
-                                                                            // leading/trailing
-                                                                            // blanks
-                cityLat[cityNumber] = Integer.parseInt(tokenizedLine
-                        .nextToken());
-                cityLong[cityNumber] = Integer.parseInt(tokenizedLine
-                        .nextToken());
-                cityPop[cityNumber] = Integer.parseInt(tokenizedLine
-                        .nextToken());
-                // while loop to put distances in the array; this may need to
-                // read several lines
+                
                 int mileNumber = 0;
                 while (mileNumber < cityNumber)
                 {
@@ -81,21 +66,13 @@ public class Tsp
     // A simple getIndex method to help test the constructor
     int getIndex(String city, String state)
     {
-        int location;
-        for (location = 0; location < numCities; location++)
-            if ((cityName[location].equals(city))
-                    && (cityState[location].equals(state)))
-                return location;
-        return -1;
+        return 0;
     }
  
     // Print information about a city, given a city index
     void printCityInfo(int index)
     {
-        System.out
-                .println(cityName[index] + " " + cityState[index] + " "
-                        + cityLat[index] + " " + cityLong[index] + " "
-                        + cityPop[index]);
+       
     }
  
     // Print distance information between a given pair of cities
@@ -241,7 +218,7 @@ public class Tsp
     public static void main(String[] args)
     {
         int n = 15;
-        TSPUsingMST T = new TSPUsingMST(n);
+        Tsp T = new Tsp(n);
         // Initialize the list of vertices in the tree
         // Initially, no one except vertex 0 is in the tree
         boolean[] visited = new boolean[n];
@@ -281,8 +258,7 @@ public class Tsp
         } // end for-i
           // Printing the MST
         for (int i = 1; i < n; i++)
-            System.out.println(T.cityName[i] + " " + T.cityState[i] + ", "
-                    + T.cityName[tree[i]] + " " + T.cityState[tree[i]]);
+            System.out.println("aqui va infomracion");
         // Compting the MST cost
         long cost = 0;
         for (int i = 0; i < n; i++)
