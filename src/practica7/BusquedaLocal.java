@@ -3,6 +3,7 @@ package practica7;
 import java.util.ArrayList;
 
 import criterios.BestFirst;
+import criterios.Criterio;
 import criterios.Greedy;
 
 public class BusquedaLocal {
@@ -15,8 +16,10 @@ public class BusquedaLocal {
 	}
 	private criterios criterio;
 	
-	public BusquedaLocal(criterios criterio) {
+	public BusquedaLocal(criterios criterio, Tsp tsp) {
 		this.criterio=criterio;
+		this.camino=camino;
+		this.tsp=tsp;
 	}
 	
 	public void setTsp(Tsp tsp) {
@@ -31,15 +34,14 @@ public class BusquedaLocal {
 		this.cost = d;
 	}
 	
-	public void ejecutar(){
-		
+	public int[] ejecutar(){
+		Criterio cr;
 		if(this.criterio==criterios.Greedy){
-			Greedy gred = new Greedy();
-			gred.evaluar(this.tsp,this.camino);//falta sumarle las cosas que sean para evaluarlo
-		}else if(this.criterio==criterios.BestFirst){
-			BestFirst bf = new BestFirst();
-			bf.evaluar(this.tsp,this.camino);//falta sumarle las cosas que sean para evaluarlo
-		}	
+			cr = new Greedy();
+		}else{
+			cr = new BestFirst();
+		}
+		return cr.evaluar(this.tsp);
 	}
 	
 }

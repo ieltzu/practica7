@@ -5,5 +5,5 @@ import practica7.Tsp;
 
 public interface Criterio {
 	
-	public Tsp evaluar(Tsp tsp,int[] camino);
+	public int[] evaluar(Tsp tsp);
 }

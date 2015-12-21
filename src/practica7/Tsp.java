@@ -57,7 +57,9 @@ public class Tsp
         
     }
     
-    
+    public int getNumcities() {
+		return numcities;
+	}
     
     public int[] crearMuestraAleatoria(){
     	int[] citi= new int[numcities];
@@ -66,15 +68,13 @@ public class Tsp
 			todas.add(i);
 		}
     	int i=0;
-    	while(todas.size()==0){
+    	while(todas.size()!=0){
     		int pos = (int) Math.floor(Math.random()*todas.size());
+    		System.out.println(todas.size());
     		citi[i++]=todas.get(pos);
     		todas.remove(pos);
     	}
     	return citi;
-    	
-    }
-    public void crearSwaps(ArrayList<Tsp> tsps){
     	
     }
     // A simple getIndex method to help test the constructor
@@ -173,56 +173,12 @@ public class Tsp
     {
         int n = 15;
         Tsp T = new Tsp("dantzig42.tsp");
-        T.printMatriz();
-        int [] sol = T.greedyTSP();
+        //T.printMatriz();
+        BusquedaLocal bl = new BusquedaLocal(BusquedaLocal.criterios.Greedy,T);
+        int [] sol = bl.ejecutar();
         for (int i = 0; i < sol.length; i++) {
-        	System.out.println(sol[i]);
-			
+        	System.out.print(sol[i]+", ");
 		}
-        // Initialize the list of vertices in the tree
-        // Initially, no one except vertex 0 is in the tree
-//        boolean[] visited = new boolean[n];
-//        for (int i = 0; i < n; i++)
-//            visited[i] = false;
-//        visited[0] = true;
-//        // Initialize the int[] that maintains the tree to default values
-//        // No vertices have parents set, except vertex 0 whose parent is itself
-//        int[] tree = new int[n];
-//        for (int i = 0; i < n; i++)
-//            tree[i] = -1;
-//        tree[0] = 0;
-//        for (int i = 1; i <= n - 1; i++)
-//        {
-//            long minWeight = Long.MAX_VALUE;
-//            int bestVertex = -1;
-//            int bestParent = -1;
-//            for (int j = 0; j < n; j++)
-//            {
-//                for (int k = 0; k < n; k++)
-//                {
-//                    if ((visited[j]) && (!visited[k]))
-//                    {
-//                        if (T.getDistance(j, k) < minWeight)
-//                        {
-//                            minWeight = T.getDistance(j, k);
-//                            bestVertex = k;
-//                            bestParent = j;
-//                        } // end if better distance is found
-//                    } // end if an edge between a visited and an unvisited is
-//                      // found
-//                } // end for-k
-//            } // end for-j
-//              // Update visited and tree
-//            visited[bestVertex] = true;
-//            tree[bestVertex] = bestParent;
-//        } // end for-i
-//          // Printing the MST
-//        for (int i = 1; i < n; i++)
-//            System.out.println("aqui va infomracion");
-//        // Compting the MST cost
-//        long cost = 0;
-//        for (int i = 0; i < n; i++)
-//            cost += T.getDistance(i, tree[i]);
-//        System.out.println("The cost of the minimum spanning tree is " + cost);
+        System.out.println("\nY el costo:"+ T.cost(sol));
     }
 } 

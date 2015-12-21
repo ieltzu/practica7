@@ -8,21 +8,38 @@ public class BestFirst implements Criterio{
 
 	@Override
 	public Tsp evaluar(Tsp tsp,int[] camino) {
-		ArrayList<Tsp> swaps = new ArrayList<Tsp>();
-		tsp.crearSwaps(swaps);
-		double costo=tsp.cost(camino);
+		this.tsp = tsp;
+		int[] ganadora = tsp.crearMuestraAleatoria();
+		ArrayList<int[]> swaps = this.crearSwaps(ganadora);
+		double costo= tsp.cost(ganadora);
 		boolean mejorado=true;
-		double costotmp=0.0;
+		double costotmp=Double.MAX_VALUE;
+		double costolocal;
+//		int loop =0;
 		do{
-			//aqui ira el algortimo greedy
-			if(costotmp<costo){
+			int[] ganlocal = null;
+			costolocal=Double.MAX_VALUE;
+			for (int[] is : swaps) {
+				costotmp = tsp.cost(is);
+				if (costotmp<costolocal){
+					costolocal=costotmp;
+					ganlocal=is;
+				}
+			}
+			if(costolocal>=costo){
 				mejorado=false;
 			}else{
-				costo=costotmp;
+				costo=costolocal;
+				ganadora = ganlocal;
+				swaps = this.crearSwaps(ganadora);
 			}
-			
+//			System.out.print(loop++ + " - " + costo + " - ");
+//			for (int i = 0; i < ganadora.length; i++) {
+//	        	System.out.print(ganadora[i]+", ");
+//			}
+			System.out.println();
 		}while(mejorado);
-		return null;
+		return ganadora;
 	}
 
 }

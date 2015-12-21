@@ -2,95 +2,59 @@ package criterios;
 
 import java.util.ArrayList;
 
+import mutaciones.Swap;
 import practica7.Tsp;
 
 public class Greedy implements Criterio{
 
+	private Tsp tsp;
 	@Override
-	public Tsp evaluar(Tsp tsp, int[] camino){
-		ArrayList<Tsp> swaps = new ArrayList<Tsp>();
-		tsp.crearSwaps(swaps);
-		double costo= tsp.cost(camino);
+	public int[] evaluar(Tsp tsp){
+		this.tsp = tsp;
+		int[] ganadora = tsp.crearMuestraAleatoria();
+		ArrayList<int[]> swaps = this.crearSwaps(ganadora);
+		double costo= tsp.cost(ganadora);
 		boolean mejorado=true;
-		double costotmp=0.0;
+		double costotmp=Double.MAX_VALUE;
+		double costolocal;
+//		int loop =0;
 		do{
-			//aqui ira el algortimo greedy
-			if(costotmp<costo){
+			int[] ganlocal = null;
+			costolocal=Double.MAX_VALUE;
+			for (int[] is : swaps) {
+				costotmp = tsp.cost(is);
+				if (costotmp<costolocal){
+					costolocal=costotmp;
+					ganlocal=is;
+				}
+			}
+			if(costolocal>=costo){
 				mejorado=false;
 			}else{
-				costo=costotmp;
+				costo=costolocal;
+				ganadora = ganlocal;
+				swaps = this.crearSwaps(ganadora);
 			}
-			
+//			System.out.print(loop++ + " - " + costo + " - ");
+//			for (int i = 0; i < ganadora.length; i++) {
+//	        	System.out.print(ganadora[i]+", ");
+//			}
+			System.out.println();
 		}while(mejorado);
-       /*
-		// Load triangle 0-1-2 into the the first 3 slots of the greedy array
-        int[] greedy = new int[this.distances.length];
-        int currentDistance;
-        greedy[0] = 0;
-        greedy[1] = 1;
-        greedy[2] = 2;
-        int currentBestDistance = getDistance(0, 1) + getDistance(1, 2)
-                + getDistance(2, 0);
-        for (int i = 0; i < this.distances.length; i++)
-            for (int j = 0; j < i; j++)
-                for (int k = 0; k < j; k++)
-                    if ((currentDistance = getDistance(i, j)
-                            + getDistance(j, k) + getDistance(i, k)) < currentBestDistance)
-                    {
-                        greedy[0] = i;
-                        greedy[1] = j;
-                        greedy[2] = k;
-                        currentBestDistance = currentDistance;
-                    }
-        // Try greedily to add a city that yields the smallest increase
-        // in the cost of the tour
-        int partialTourSize = 3;
-        boolean[] visited = new boolean[this.distances.length];
-        for (int i = 0; i < this.distances.length; i++)
-            visited[i] = false;
-        visited[greedy[0]] = true;
-        visited[greedy[1]] = true;
-        visited[greedy[2]] = true;
-        // Main loop: keep repeating until partial tour covers all cities
-        while (partialTourSize < this.distances.length)
-        {
-            int smallestIncrease = Integer.MAX_VALUE;
-            int increase = 0;
-            int bestInsertionPoint = 0;
-            int bestCity = 0;
-            // Scan through all cities, stopping at unvisited cities
-            for (int i = 0; i < this.distances.length; i++)
-            {
-                if (!visited[i])
-                {
-                    // Consider all possible positions of inserting city i into
-                    // the tour
-                    // and record the smallest increase
-                    for (int j = 0; j < partialTourSize; j++)
-                    {
-                        increase = getDistance(greedy[j], i)
-                                + getDistance(i, greedy[(j + 1) % this.distances.length])
-                                - getDistance(greedy[j], greedy[(j + 1)
-                                        % this.distances.length]);
-                        if (increase < smallestIncrease)
-                        {
-                            smallestIncrease = increase;
-                            bestCity = i;
-                            bestInsertionPoint = j;
-                        } // end of if we have found a smaller increase
-                    } // end of for-j
-                } // end of if not visited
-            } // end of for-i
-              // Now we are ready to insert the bestCity at the bestInsertionPoint
-            for (int j = partialTourSize - 1; j > bestInsertionPoint; j--)
-                greedy[j + 1] = greedy[j];
-            greedy[bestInsertionPoint + 1] = bestCity;
-            visited[bestCity] = true;
-            partialTourSize++;
-        } // end-while
-        return greedy;
-        */
-		return null;
+		return ganadora;
 		}
+
+	private ArrayList<int[]> crearSwaps(int[] gan) {
+		ArrayList<int[]> nuevos = new ArrayList<int[]>();
+		Swap sp = new Swap();
+		for (int i = 0; i < this.tsp.getNumcities(); i++) {
+			for (int j = i; j < this.tsp.getNumcities(); j++) {
+				sp.setX(i);
+				sp.setY(j);
+				nuevos.add(sp.mutacion(gan));
+			}
+		}
+		return nuevos;
+	}
 }	
 

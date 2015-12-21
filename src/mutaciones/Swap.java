@@ -8,6 +8,8 @@ public class Swap implements Mutacion{
 		x=x;
 		y=y;
 	}
+	public Swap() {
+	}
 	
 	public void setX(int x) {
 		this.x = x;
