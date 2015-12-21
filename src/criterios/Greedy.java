@@ -2,7 +2,6 @@ package criterios;
 
 import java.util.ArrayList;
 
-import mutaciones.Swap;
 import practica7.Tsp;
 
 public class Greedy  extends Criterios implements Criterio{
@@ -12,11 +11,10 @@ public class Greedy  extends Criterios implements Criterio{
 	}
 	
 	@Override
-	public int[] evaluar(Tsp tsp){
-		
-		int[] ganadora = tsp.crearMuestraAleatoria();
+	public int[] evaluar(){
+		int[] ganadora = this.tsp.crearMuestraAleatoria();
 		ArrayList<int[]> swaps = this.crearSwaps(ganadora);
-		double costo= tsp.cost(ganadora);
+		double costo= this.tsp.cost(ganadora);
 		boolean mejorado=true;
 		double costotmp=Double.MAX_VALUE;
 		double costolocal;
@@ -25,7 +23,7 @@ public class Greedy  extends Criterios implements Criterio{
 			int[] ganlocal = null;
 			costolocal=Double.MAX_VALUE;
 			for (int[] is : swaps) {
-				costotmp = tsp.cost(is);
+				costotmp = this.tsp.cost(is);
 				if (costotmp<costolocal){
 					costolocal=costotmp;
 					ganlocal=is;
@@ -45,7 +43,7 @@ public class Greedy  extends Criterios implements Criterio{
 			System.out.println();
 		}while(mejorado);
 		return ganadora;
-		}
+	}
 
 	
 }	

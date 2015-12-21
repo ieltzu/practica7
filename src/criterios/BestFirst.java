@@ -2,7 +2,6 @@ package criterios;
 
 import java.util.ArrayList;
 
-import mutaciones.Swap;
 import practica7.Tsp;
 
 public class BestFirst extends Criterios implements Criterio{
@@ -12,7 +11,7 @@ public class BestFirst extends Criterios implements Criterio{
 	}
 	
 	@Override
-	public int[] evaluar(Tsp tsp) {
+	public int[] evaluar() {
 		int[] ganadora = tsp.crearMuestraAleatoria();
 		ArrayList<int[]> swaps = this.crearSwaps(ganadora);
 		double costo= tsp.cost(ganadora);

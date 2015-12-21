@@ -7,7 +7,7 @@ import practica7.Tsp;
 
 public class Criterios {
 	
-	private Tsp tsp;
+	public Tsp tsp;
 	
 	public Criterios(Tsp tsp) {
 		this.tsp=tsp;

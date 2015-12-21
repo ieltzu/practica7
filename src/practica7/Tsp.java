@@ -3,10 +3,8 @@ package practica7;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.StringTokenizer;
  
 public class Tsp
 {
@@ -83,12 +81,6 @@ public class Tsp
         return 0;
     }
  
-    // Print information about a city, given a city index
-    void printCityInfo(int index)
-    {
-       
-    }
- 
     // Print distance information between a given pair of cities
     void printDistanceInfo(int i, int j)
     {
@@ -108,42 +100,11 @@ public class Tsp
             return 0;
     }
  
-    
- 
     void copy(int[] source, int[] dest)
     {
         for (int i = 0; i < dest.length; i++)
             dest[i] = source[i];
     }
- 
-//    void TSP(int[] R, int partialTourSize, boolean[] visited, int[] T)
-//    {
-//        // Base case: we have discovered a tour better than T
-//        if ((partialTourSize == numCities) && (cost(R) < cost(T)))
-//        {
-//            System.out.println("Base case. Tour cost is " + cost(R));
-//            copy(R, T);
-//            return;
-//        }
-//        // Another base case: our partial tour is not worth completing
-//        if (cost(R, partialTourSize) >= cost(T))
-//            return;
-//        // Recursive case: R is not complete and is currently better than T
-//        // and is therefore worth completing
-//        for (int i = 0; i < numCities; i++)
-//        {
-//            if (!visited[i])
-//            {
-//                // System.out.println("Appending " + i);
-//                visited[i] = true;
-//                R[partialTourSize++] = i;
-//                TSP(R, partialTourSize, visited, T);
-//                partialTourSize--;
-//                visited[i] = false;
-//                // System.out.println("Deleting " + i);
-//            }
-//        } // end of for-loop
-//    } // end of TSP
  
     public double cost(int[] tour)
     {
@@ -169,9 +130,7 @@ public class Tsp
     }
  
     // Main method
-    public static void main(String[] args)
-    {
-        int n = 15;
+    public static void main(String[] args){
         Tsp T = new Tsp("dantzig42.tsp");
         //T.printMatriz();
         BusquedaLocal bl = new BusquedaLocal(BusquedaLocal.criterios.Greedy,T);
@@ -180,5 +139,10 @@ public class Tsp
         	System.out.print(sol[i]+", ");
 		}
         System.out.println("\nY el costo:"+ T.cost(sol));
+        GeneticAlgorithm Ga = new GeneticAlgorithm(T);
+        int [] sol2 = Ga.ejecutar();
+        for (int i = 0; i < sol2.length; i++) {
+        	System.out.print(sol[i]+", ");
+		}
     }
 } 

@@ -1,7 +1,5 @@
 package practica7;
 
-import java.util.ArrayList;
-
 import criterios.BestFirst;
 import criterios.Criterio;
 import criterios.Greedy;
@@ -9,8 +7,6 @@ import criterios.Greedy;
 public class BusquedaLocal {
 	
 	private Tsp tsp;
-	private int[] camino;
-	private double cost;
 	public enum criterios{
 		Greedy, BestFirst
 	}
@@ -18,7 +14,6 @@ public class BusquedaLocal {
 	
 	public BusquedaLocal(criterios criterio, Tsp tsp) {
 		this.criterio=criterio;
-		this.camino=camino;
 		this.tsp=tsp;
 	}
 	
@@ -26,22 +21,14 @@ public class BusquedaLocal {
 		this.tsp = tsp;
 	}
 	
-	public void setCamino(int[] camino) {
-		this.camino = camino;
-	}
-	
-	public void setCost(double d) {
-		this.cost = d;
-	}
-	
 	public int[] ejecutar(){
 		Criterio cr;
 		if(this.criterio==criterios.Greedy){
-			cr = new Greedy();
+			cr = new Greedy(this.tsp);
 		}else{
-			cr = new BestFirst();
+			cr = new BestFirst(this.tsp);
 		}
-		return cr.evaluar(this.tsp);
+		return cr.evaluar();
 	}
 	
 }
