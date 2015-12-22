@@ -14,7 +14,11 @@ public class BestFirst extends Criterios implements Criterio{
 	public int[] evaluar() {
 		int[] ganadora = tsp.crearMuestraAleatoria();
 		ArrayList<int[]> swaps = this.crearSwaps(ganadora);
-		double costo= tsp.cost(ganadora);
+		double costo=0;
+		try {
+			costo = tsp.cost(ganadora);
+		} catch (Exception e1) {
+		}
 		boolean mejorado=true;
 		double costotmp=Double.MAX_VALUE;
 		double costolocal;
@@ -23,7 +27,12 @@ public class BestFirst extends Criterios implements Criterio{
 			int[] ganlocal = null;
 			costolocal=Double.MAX_VALUE;
 			for (int[] is : swaps) {
-				costotmp = tsp.cost(is);
+				try {
+					costotmp = tsp.cost(is);
+				} catch (Exception e) {
+					mejorado = false;
+					break;
+				}
 				if (costotmp<costolocal){
 					costolocal=costotmp;
 					ganlocal=is;
@@ -41,7 +50,7 @@ public class BestFirst extends Criterios implements Criterio{
 //			for (int i = 0; i < ganadora.length; i++) {
 //	        	System.out.print(ganadora[i]+", ");
 //			}
-			System.out.println();
+			//System.out.println();
 		}while(mejorado);
 		return ganadora;
 	}

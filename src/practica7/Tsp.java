@@ -11,6 +11,8 @@ public class Tsp
     // 2-D array to keep track of pairwise distances between cities
     private int[][] distances;
     private int numcities;
+    private int llamadas = 0;
+    private int maximollamadas = 1000000;
     // number of cities
  
     public Tsp(String fichero)
@@ -58,8 +60,113 @@ public class Tsp
     public int getNumcities() {
 		return numcities;
 	}
+    class Tuple<String, Double> { 
+		  public String op; 
+		  public final double valor; 
+		  public Tuple(String x, double y) { 
+		    this.op = x; 
+		    this.valor = y; 
+		  } 
+		  public java.lang.String toString(){
+			  return (java.lang.String) this.op;
+		  }
+	} 
+    private double suma(ArrayList<Tuple> tuples){
+    	double s = 0;
+    	for (Tuple tuple : tuples) {
+			s+=tuple.valor;
+		}
+    	return s;
+    }
+    private ArrayList<Tuple> recalcularOpciones(ArrayList<String> result) {
+
+    	ArrayList<Tuple> nuevos = new ArrayList<Tuple>();
+    	ArrayList<String> c = new ArrayList<String>();
+    	ArrayList<String> h = new ArrayList<String>();
+    	ArrayList<String> b = new ArrayList<String>();
+    	for (int i = 0; i < this.numcities; i++) {
+			c.add(i+"");
+		}
+    	String[] arr;
+    	for (String s : result) {
+			arr = s.split("-");
+			h.add(arr[0]);
+			b.add(arr[arr.length-1]);
+			for (int i = 1; i < arr.length-1; i++) {
+				c.remove(arr[i]);
+			}
+		}
+    	for (int i = 0; i < c.size(); i++) {
+			for (int j = 0; j < c.size(); j++) {
+				if ( !(  h.contains(i+"") || b.contains(j+"")  ) ){
+					if(i!=j){
+						nuevos.add(new Tuple(c.get(i)+"-"+c.get(j),1.0/this.getDistance(Integer.parseInt(c.get(i)), Integer.parseInt(c.get(j)))));
+					}else{
+						nuevos.add(new Tuple(c.get(i)+"",1.0/200));
+					}
+				}
+			}
+		}
+    	System.out.println(nuevos.toString());
+    	return nuevos;
+    }
+    private void añadirRuta(ArrayList<String> rutas, Tuple tp){
+    	int añadidos = 0;
+    	int tpa = Integer.parseInt(((String) tp.op).split("-")[0]);
+    	int tpb = Integer.parseInt(((String) tp.op).split("-")[((String) tp.op).split("-").length-1]);
+    	int sa,sb;
+    	for (int i = 0; i < rutas.size(); i++) {
+			String s = rutas.get(i);
+			sa = Integer.parseInt(s.split("-")[0]);
+	    	sb = Integer.parseInt(s.split("-")[s.split("-").length-1]);
+			if ( tpa==sb ){
+				tp.op = s+(tpb!=sb?"-"+tpb:"");
+				rutas.remove(s);
+			}
+			if (tpb == sa){
+				tp.op = (tpa!=sa?tpa+"-":"")+s;
+				rutas.remove(s);
+			}
+		}
+    	rutas.add((String)tp.op);
+    }
     
     public int[] crearMuestraAleatoria(){
+    	ArrayList<Tuple> op = new ArrayList<Tuple>();
+    	for (int i = 0; i < this.numcities; i++) {
+			for (int j = 0; j < this.numcities; j++) {
+				if(i!=j){
+					op.add(new Tuple(i+"-"+j,1.0/this.getDistance(i, j)));
+				}else{
+					op.add(new Tuple(i+"",1.0/200));
+				}
+			}
+		}
+    	ArrayList<String> result = new ArrayList<String>();
+    	while (op.size()>0){
+    		double random = Math.random()*this.suma(op);
+    		double acum=0;
+    		for (int i = 0; i < op.size(); i++) {
+				Tuple js = op.get(i);
+				acum += js.valor;
+				if (acum>random){
+					System.out.println("---------------------------------"+js.op);
+					this.añadirRuta(result, js);
+					op=this.recalcularOpciones(result);
+					for (String string : result) {
+						System.out.println(string);
+					}
+					System.out.println("---------------------------------");
+					break;
+				}
+			}
+    	}
+    	System.out.println(result.size());
+    	for (String string : result) {
+			System.out.println(string);
+		}
+    	
+    	
     	int[] citi= new int[numcities];
     	ArrayList<Integer> todas = new ArrayList<Integer>();
     	for (int i = 0; i < citi.length; i++) {
@@ -68,14 +175,14 @@ public class Tsp
     	int i=0;
     	while(todas.size()!=0){
     		int pos = (int) Math.floor(Math.random()*todas.size());
-    		System.out.println(todas.size());
     		citi[i++]=todas.get(pos);
     		todas.remove(pos);
     	}
     	return citi;
     	
     }
-    // A simple getIndex method to help test the constructor
+
+	// A simple getIndex method to help test the constructor
     int getIndex(String city, String state)
     {
         return 0;
@@ -106,8 +213,11 @@ public class Tsp
             dest[i] = source[i];
     }
  
-    public double cost(int[] tour)
+    public double cost(int[] tour) throws Exception
     {
+    	if (this.llamadas++>this.maximollamadas){
+    		throw new Exception();
+    	}
         return cost(tour, tour.length);
     }
  
@@ -138,11 +248,15 @@ public class Tsp
         for (int i = 0; i < sol.length; i++) {
         	System.out.print(sol[i]+", ");
 		}
-        System.out.println("\nY el costo:"+ T.cost(sol));
-        GeneticAlgorithm Ga = new GeneticAlgorithm(T);
-        int [] sol2 = Ga.ejecutar();
-        for (int i = 0; i < sol2.length; i++) {
-        	System.out.print(sol[i]+", ");
+        try {
+			System.out.println("\nY el costo:"+ T.cost(sol));
+		} catch (Exception e) {
+			System.out.println("Se ha llegado al limite.");
 		}
+//        GeneticAlgorithm Ga = new GeneticAlgorithm(T, 50);
+//        int [] sol2 = Ga.ejecutar();
+//        for (int i = 0; i < sol2.length; i++) {
+//        	System.out.print(sol[i]+", ");
+//		}
     }
 } 
