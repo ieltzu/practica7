@@ -1,0 +1,429 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.9.30)  22 DEC 2015 22:47
+entering extended mode
+**praktika7.tex
+(praktika7.tex
+LaTeX2e <2015/01/01> patch level 2
+Babel <3.9m> and hyphenation patterns for 69 languages loaded.
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\article.cls"
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\size10.clo"
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+\bibindent=\dimen102
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.sty"
+Package: geometry 2010/09/12 v5.6 Page Geometry
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\keyval.sty"
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks14
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifpdf.sty"
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ifvtex.sty"
+Package: ifvtex 2010/03/01 v1.5 Detect VTeX and its facilities (HO)
+Package ifvtex Info: VTeX not detected.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\ifxetex\ifxetex.sty"
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+)
+\Gm@cnth=\count87
+\Gm@cntv=\count88
+\c@Gm@tempcnt=\count89
+\Gm@bindingoffset=\dimen103
+\Gm@wd@mp=\dimen104
+\Gm@odd@mp=\dimen105
+\Gm@even@mp=\dimen106
+\Gm@layoutwidth=\dimen107
+\Gm@layoutheight=\dimen108
+\Gm@layouthoffset=\dimen109
+\Gm@layoutvoffset=\dimen110
+\Gm@dimlist=\toks15
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\geometry\geometry.cfg"))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amscls\amsthm.sty"
+Package: amsthm 2015/03/04 v2.20.2
+\thm@style=\toks16
+\thm@bodyfont=\toks17
+\thm@headfont=\toks18
+\thm@notefont=\toks19
+\thm@headpunct=\toks20
+\thm@preskip=\skip43
+\thm@postskip=\skip44
+\thm@headsep=\skip45
+\dth@everypar=\toks21
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\inputenc.sty"
+Package: inputenc 2015/03/17 v1.2c Input encoding file
+\inpenc@prehook=\toks22
+\inpenc@posthook=\toks23
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\latin1.def"
+File: latin1.def 2015/03/17 v1.2c Input encoding file
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\amsfonts.sty"
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\@emptytoks=\toks24
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\float\float.sty"
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count90
+\float@exts=\toks25
+\float@box=\box26
+\@float@everytoks=\toks26
+\@floatcapt=\box27
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\fancyvrb\fancyvrb.sty"
+Package: fancyvrb 2008/02/07
+
+Style option: `fancyvrb' v2.7a, with DG/SPQR fixes, and firstline=lastline fix 
+<2008/02/07> (tvz)
+\FV@CodeLineNo=\count91
+\FV@InFile=\read1
+\FV@TabBox=\box28
+\c@FancyVerbLine=\count92
+\FV@StepNumber=\count93
+\FV@OutFile=\write3
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\indentfirst.sty"
+Package: indentfirst 1995/11/23 v1.03 Indent first paragraph (DPC)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\array.sty"
+Package: array 2014/10/28 v2.4c Tabular extension package (FMi)
+\col@sep=\dimen111
+\extrarowheight=\dimen112
+\NC@list=\toks27
+\extratabsurround=\skip46
+\backup@length=\skip47
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphicx.sty"
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\graphics.sty"
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\trig.sty"
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\graphics.cfg"
+File: graphics.cfg 2007/01/18 v1.5 graphics configuration of teTeX/TeXLive
+)
+Package graphics Info: Driver file: pdftex.def on input line 94.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\pdftex-def\pdftex.def"
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\infwarerr.sty"
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\oberdiek\ltxcmds.sty"
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count94
+))
+\Gin@req@height=\dimen113
+\Gin@req@width=\dimen114
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\natbib\natbib.sty"
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip48
+\bibsep=\skip49
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count95
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\graphics\color.sty"
+Package: color 2014/10/28 v1.1a Standard LaTeX Color (DPC)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\00miktex\color.cfg"
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package color Info: Driver file: pdftex.def on input line 142.
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\algorithm2e\algorithm2e.sty"
+Package: algorithm2e 2013/01/06 v5.00 algorithms environments
+\c@AlgoLine=\count96
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\ifthen.sty"
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+\algocf@hangindent=\skip50
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\tools\xspace.sty"
+Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ltxmisc\relsize.sty"
+Package: relsize 2003/07/04 ver 3.1
+)
+********************************************************
+Package `algorithm2e' Release 5.1 -- october 19 2015 --
+- algorithm2e-announce@lirmm.fr mailing list for announcement about releases
+- algorithm2e-discussion@lirmm.fr mailing list for discussion about package
+subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
+- Author: Christophe Fiorio (christophe.fiorio@umontpellier.fr)
+********************************************************
+\skiptotal=\skip51
+\skiplinenumber=\skip52
+\skiprule=\skip53
+\skiphlne=\skip54
+\skiptext=\skip55
+\skiplength=\skip56
+\algomargin=\skip57
+\skipalgocfslide=\skip58
+\algowidth=\dimen115
+\inoutsize=\dimen116
+\inoutindent=\dimen117
+\interspacetitleruled=\dimen118
+\interspacealgoruled=\dimen119
+\interspacetitleboxruled=\dimen120
+\algocf@ruledwidth=\skip59
+\algocf@inoutbox=\box29
+\algocf@inputbox=\box30
+\AlCapSkip=\skip60
+\AlCapHSkip=\skip61
+\algoskipindent=\skip62
+\algocf@nlbox=\box31
+\algocf@hangingbox=\box32
+\algocf@untilbox=\box33
+\algocf@skipuntil=\skip63
+\algocf@capbox=\box34
+\algoheightruledefault=\skip64
+\algoheightrule=\skip65
+\algotitleheightruledefault=\skip66
+\algotitleheightrule=\skip67
+\c@algocfline=\count97
+\c@algocfproc=\count98
+\c@algocf=\count99
+\algocf@algoframe=\box35
+\algocf@algobox=\box36
+)
+\c@theo=\count100
+\c@defn=\count101
+ (praktika7.aux)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(36.135pt, 525.23788pt, 36.135pt)
+* v-part:(T,H,B)=(36.135pt, 772.77686pt, 36.135pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=525.23788pt
+* \textheight=772.77686pt
+* \oddsidemargin=-36.135pt
+* \evensidemargin=-36.135pt
+* \topmargin=-73.135pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=57.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count102
+\scratchdimen=\dimen121
+\scratchbox=\box37
+\nofMPsegments=\count103
+\nofMParguments=\count104
+\everyMPshowfont=\toks28
+\MPscratchCnt=\count105
+\MPscratchDim=\dimen122
+\MPnumerator=\count106
+\makeMPintoPDFobject=\count107
+\everyMPtoPDFconversion=\toks29
+)
+LaTeX Font Info:    Try loading font information for U+msa on input line 33.
+ ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsa.fd"
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 33.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\amsfonts\umsb.fd"
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 33.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 33.
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <6> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 33.
+ [1
+
+{C:/Users/ieltzu/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+
+LaTeX Warning: File `./grafica1.png' not found on input line 108.
+
+
+! Package pdftex.def Error: File `./grafica1.png' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.108 ...hics[width=0.6\textwidth]{./grafica1.png}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+[2]
+
+LaTeX Warning: File `./grafica2.png' not found on input line 116.
+
+
+! Package pdftex.def Error: File `./grafica2.png' not found.
+
+See the pdftex.def package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.116 ...hics[width=0.6\textwidth]{./grafica2.png}
+                                                  
+Using draft setting for this image.
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 111--117
+
+ []
+
+[3]
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 133.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.133 ...ttp://www.herrera.unt.edu.ar/gapia/Curso_
+                                                  AG/Curso_AG_08_Clase_5.pdf
+I've inserted a begin-math/end-math symbol since I think
+you left one out. Proceed, with fingers crossed.
+
+
+! LaTeX Error: Command \end{itemize} invalid in math mode.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.134 \end{itemize}
+                   
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.134 \end{itemize}
+                   
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+
+! LaTeX Error: Something's wrong--perhaps a missing \item.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.134 \end{itemize}
+                   
+Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.134 \end{itemize}
+                   
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+[4] (praktika7.aux) )
+(\end occurred inside a group at level 1)
+
+### simple group (level 1) entered at line 1061 ({)
+### bottom level 
+Here is how much of TeX's memory you used:
+ 3722 strings out of 493673
+ 53397 string characters out of 3143147
+ 133497 words of memory out of 3000000
+ 7023 multiletter control sequences out of 15000+200000
+ 12017 words of font info for 47 fonts, out of 3000000 for 9000
+ 1025 hyphenation exceptions out of 8191
+ 28i,13n,32p,484b,1649s stack positions out of 5000i,500n,10000p,200000b,50000s
+<C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/
+cm/cmbx10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmbx12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
+mmi10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmm
+i7.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.
+pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr12.pfb
+><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr17.pfb><C
+:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr7.pfb><C:/Pr
+ogram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Prog
+ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program
+ Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy7.pfb><C:/Program Fi
+les (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Files
+ (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program Files (
+x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on praktika7.pdf (4 pages, 162522 bytes).
+PDF statistics:
+ 71 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+
