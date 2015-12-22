@@ -26,7 +26,7 @@
 \begin{document}
 \author{Ieltzu Irazu, Mikel De Velasco Y María Inés Fernandez}
 \pagenumbering{arabic}
-\title{Práctica 6}
+\title{Práctica 7}
 
 \author{\thanks{}}
 \date{\today}
@@ -34,19 +34,41 @@
 
 \section{Introducción:}
 \subsection{Exposición de la práctica:}
-En la práctica presentada se nos pide implementar el algoritmo K-Means para el conjunto de datos colon.arff. Para ello hemos desarrollado nuestro código en el lenguaje de programación Java y después hemos creado nuestro ejecutador .jar. Además hemos desarrollado este documento para plasmar las partes más importantes de la práctica.
+En la práctica presentada se nos pide implementar los algoritmos de optimización denominados búsqueda local(para una sola solución) y algoritmos genéticos(varias soluciones) para el conjunto de datos dantzig42. Para ello hemos desarrollado nuestro código en el lenguaje de programación Java y después hemos creado nuestro ejecutador .jar. Además hemos desarrollado este documento para plasmar las partes más importantes de la práctica.
 
 \subsection{Objetivos:}
-Los objetivos son claros; conseguir un algoritmo eficiente y efectivo para clusterizar un conjunto de datos del que no se sabe la clase. El código que hemos desarrollado no es dependiente a un solo conjunto de datos,ya que es posible utilizarlo en más de un conjunto de datos.
+Los objetivos son claros; conseguir un algoritmo eficiente y efectivo para optimizar una solción o un conjuntos de soluciones de un conjunto de datos. El problema planteado tiene nombre propio TSP. El código que hemos desarrollado no es dependiente a un solo conjunto de datos,ya que es posible utilizarlo en más de un conjunto de datos(menos la lectura).
 
-Como hemos recibido el archivo colon.arff para desarrollar la práctica vamos a analizar el archivo para ver su contenido. En el archivo de datos podemos encontrar 2000 variables predictoras. No tiene clase. Como son tantas variables nos limitaremos a decir que todas ellas son de tipo numérico, por lo tanto no habrá que discretizar ninguna variable y tampoco habrá que eliminar ninguna para poder implementar el algoritmo K-Means, ya que este solamente acepta variables de este tipo.
+Como hemos recibido el archivo dantzig42 para desarrollar la práctica, vamos a analizar el archivo para ver su contenido. En el archivo de datos podemos encontrar un conjunto de valores numéricos separados por ceros. Estos ceros indican un salto de linea. Si procesamos estos datos, conseguimos la mitad una matriz de una dimensión de 49x49. Como tenemos 49 ciudades, el punto en común de los pares de ciudades nos indica cual es el peso de una ciudad a otra.
 
-Para clusterizar nuestras instancias vamos a aplicar distintos grupos y haremos mediciones. Empezaremos dándole entrada del parámetro k a valor 2, el cual nos dice que cantidad de grupos vamos a tener para clusterizar las instancias. Una vez calculadas las particiones de datos calcularemos las métricas SSE y Silhouette para evaluarlo. 
+Para optimizar nuestras ciudades vamos a aplicar distintos criterios en el proceso. Empezaremos utilizando el criterio Best First y luego utilizaremos el Greedy, para la búsqueda local. Una vez conseguidos estos procesos, haremos el calculo de el algoritmo genético.  
 
 \section{Pseudocódigo del algoritmo:}
 
 \begin{algorithm}[H] 
-\caption{JRip} 
+\caption{Búsqueda Local} 
+\SetKwInOut{Input}{entrada} 
+\SetKwInOut{Output}{salida}
+\Input{} 
+\Output{ListaOrdenadaCiudades} 
+\While{$D_{Pos} = D_{Grow - Pos} \cup D_{Prune - Pos} \neq \emptyset$}{
+	 \tcp*[r]{Construir una nueva regla}
+	 Dividir $D$ en $(D_{Grow - Pos} \cup D_{Grow - Neg}) \cup (D_{Prune - Pos} \cup D_{Prune - Neg})$ \\
+	 Rule $_{:=}$ GrowRule($D_{Grow - Pos} \cup D_{Grow - Neg}$)\\
+	 Rule $_{:=}$ PruneRule($D_{Prune - Pos} \cup D_{Prune - Neg}$)\\
+	 \eIf{la tasa de error de Rule en $(D_{Prune - Pos} \cup D_{Prune - Neg}) > 50\%$}{
+	 	\Return RuleSet
+	 }{
+	 	Añadir Rule a RuleSet\\
+		Borrar ejemplos cubiertos por Rule de $D$
+		
+	 }
+}
+\Return RuleSet
+\end{algorithm} 
+
+\begin{algorithm}[H] 
+\caption{Busqueda Local} 
 \SetKwInOut{Input}{entrada} 
 \SetKwInOut{Output}{salida}
 \Input{Secuencia$_1,...,$ secuencia$_n$.} 
@@ -76,7 +98,7 @@ Hemos ejecutado el programa y nos han salido estos resultados:
 \includegraphics[width=0.6\textwidth]{./grafica1.png}
 \end{figure}
 
-Como podemos ver según el parámetro k va en aumento, las métricas van obteniendo distintos valores importantes. Son importantes porque están altamente correlacionados. Según el \ref{figura1} gráfico 1 la medida de SSE baja según que el parámetro k aumenta mientras que la medida Silhouette aumenta mientras que el parámetro k aumenta. Esto no quiere decir que el mejor número para el parámetro k sea cuanto más grande mejor. Simplemente quiere decir que como es normal si un conjunto de datos tiene 70 instancias y hacemos 50 clusters, es muy fácil que las instancias estén muy bien repartidas ya que solamente hay otras 20 instancias en las que podríamos tener dudas.\\
+Aquí escribimos conclusiones\\
 \begin{figure}[H]
 \caption{gráfico 2}
 \label{figura1} 
@@ -88,7 +110,7 @@ En cuanto al gráfico del tiempo vemos que cuanto más grande es el parámetro k el
 El algoritmo K-Means tiene una gran limitación, y es que es muy dependiente del conjunto de datos. Es un algoritmo sencillo de implementar pero pese a su simplicidad es bastante eficiente. Los algoritmos de evaluación interna SSE(p) y Silhouette son bastante completos, aunque a nuestro parecer el Silhouette es el mejor de los dos.
 	
 \section{Valoración Subjetiva:}
-\textbf{Ieltzu}:  Ha sido una práctica bastante interesante en cuanto a programación. Al principio pensábamos que iba a ser más difícil implementar el algoritmo, pero una vez que empezamos salió todo bastante fluido. Nuestros mayores problemas fueron entender los algoritmos SSE(p) y el Silhouette. Por lo demás muy fácil. Al crear los gráficos tenemos una visión mucho mejor de como cambian los valores SSE y Silhouette según sus parámetros.\\
+\textbf{Ieltzu}:  Ha sido una práctica en la que no hemos invertido mucho tiempo. Los tres teníamos que haber estudiado los dos algoritmos, por lo tanto, no ha sido muy complicado implementarlo. Práctica interesante, pero en la época del año que nos ha pillado, para mi, sobraba.\\
 \textbf{Mikel}:
 
 
@@ -98,8 +120,7 @@ El algoritmo K-Means tiene una gran limitación, y es que es muy dependiente del 
 
 \section*{Bibliografia}
 \begin{itemize}
-	\item https://es.wikipedia.org/wiki/K-means
-	\item https://exceltotal.com/como-crear-un-grafico-en-excel/
+	\item http://www.herrera.unt.edu.ar/gapia/Curso_AG/Curso_AG_08_Clase_5.pdf
 \end{itemize}
 
 \end{document}
