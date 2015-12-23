@@ -2,6 +2,7 @@ package criterios;
 
 import java.util.ArrayList;
 
+import practica7.Camino;
 import practica7.Tsp;
 
 public class BestFirst extends Criterios implements Criterio{
@@ -11,12 +12,12 @@ public class BestFirst extends Criterios implements Criterio{
 	}
 	
 	@Override
-	public int[] evaluar() {
-		int[] ganadora = tsp.crearMuestraAleatoria();
-		ArrayList<int[]> swaps = this.crearSwaps(ganadora);
+	public Camino evaluar() {
+		Camino ganadora = tsp.crearMuestraAleatoria();
+		ArrayList<Camino> swaps = this.crearSwaps(ganadora);
 		double costo=0;
 		try {
-			costo = tsp.cost(ganadora);
+			costo = ganadora.distancia();
 		} catch (Exception e1) {
 		}
 		boolean mejorado=true;
@@ -24,11 +25,11 @@ public class BestFirst extends Criterios implements Criterio{
 		double costolocal;
 //		int loop =0;
 		do{
-			int[] ganlocal = null;
+			Camino ganlocal = null;
 			costolocal=Double.MAX_VALUE;
-			for (int[] is : swaps) {
+			for (Camino is : swaps) {
 				try {
-					costotmp = tsp.cost(is);
+					costotmp = is.distancia();
 				} catch (Exception e) {
 					mejorado = false;
 					break;

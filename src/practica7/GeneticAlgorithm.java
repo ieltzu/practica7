@@ -1,10 +1,10 @@
 package practica7;
 
 import java.util.ArrayList;
-import java.util.concurrent.ArrayBlockingQueue;
+import java.util.Arrays;
+import java.util.Collections;
 
 import mutaciones.Swap;
-import practica7.BusquedaLocal.criterios;
 
 public class GeneticAlgorithm {
 	
@@ -16,26 +16,23 @@ public class GeneticAlgorithm {
 		this.poblacionMaxima = pob;
 	}
 
-	private int[][] crearPopulacion() {
-		int[][] pop = new int[this.poblacionMaxima][];
+	private Camino[] crearPopulacion() {
+		Camino[] pop = new Camino[this.poblacionMaxima];
 		for (int i = 0; i < this.poblacionMaxima; i++) {
-			int[] muestra = tsp.crearMuestraAleatoria();
-			for (int j = 0; j < muestra.length; j++) {
-				pop[i][j]=muestra[j];
-			}
+			pop[i] = tsp.crearMuestraAleatoria();;
 		}
-		return null;
+		return pop;
 	}
 	
-	private void mutaciones(int[][] cruces) {
+	private void mutaciones(Camino[] cruces) {
 		Swap sw = new Swap();
 		for (int i=0; i<cruces.length; i++) {
-			int[] is = cruces[i];
+			Camino is = cruces[i];
 			if (Math.random()<.3){
-				int r1 = (int)Math.floor(Math.random()*is.length);
+				int r1 = (int)Math.floor(Math.random()*is.paradas());
 				int r2 = r1;
 				while (r2==r1){
-					r2 = (int)Math.floor(Math.random()*is.length);
+					r2 = (int)Math.floor(Math.random()*is.paradas());
 				}
 				sw.setX(r1);
 				sw.setY(r2);
@@ -45,40 +42,58 @@ public class GeneticAlgorithm {
 		}
 	}
 
-	private int[][] generarUnCruce(int[] uno, int[] dos){
-		double random = Math.floor(Math.random()*uno.length);
-		int[][] hijos = new int[2][dos.length];
-		for (int i = 0; i < dos.length; i++) {
-			hijos[0][i] = i < random?uno[i]:dos[i];
-			hijos[1][i] = i < random?dos[i]:uno[i];
+	private Camino[] generarUnCruce(Camino uno, Camino dos){
+		double random = Math.floor(Math.random()*uno.paradas());
+		int[][] hijos = new int[2][dos.paradas()];
+		for (int i = 0; i < dos.paradas(); i++) {
+			hijos[0][i] = i < random?uno.getPos(i):dos.getPos(i);
+			hijos[1][i] = i < random?dos.getPos(i):uno.getPos(i);
 		}
-		return hijos;
+		return new Camino[]{new Camino(hijos[0]), new Camino(hijos[1])};
 	}
 	
-	private int[][] crearCruces(int[][] pop) {
-		ArrayList<int[]> nuevagen = new ArrayList<int[]>();
-		int[][] tmp;
-		int[] numeros = new int[pop[0].length];
-		for (int i = 0; i < numeros.length; i++) {
-			numeros[i] = i;
-			
+	private Camino[] crearCruces(Camino[] pop) {
+		Camino[] retu = pop.clone();
+		ArrayList<Integer> numeros = new ArrayList<Integer>();
+		for (int i = 0; i < retu.length; i++) {
+			numeros.add(i);
 		}
-		
-		for (int i = 0; i < pop.length; i++) {
-			for (int j = i; j < pop.length; j++) {
-				tmp = this.generarUnCruce(pop[i], pop[j]);
-				nuevagen.add(tmp[0]);
-				nuevagen.add(tmp[1]);
+		do {
+			int a = numeros.remove((int) Math.floor(Math.random()*numeros.size()));
+			int b = numeros.remove((int) Math.floor(Math.random()*numeros.size()));
+			Camino[] nuevos = this.generarUnCruce(retu[a], retu[b]);
+			retu[a] = nuevos[0];
+			retu[b] = nuevos[1];
+		}while(numeros.size()>1);
+		return retu;
+	}
+	
+	public Camino ejecutar() {
+		Camino[] pop = this.crearPopulacion();
+		Arrays.sort(pop);
+		Camino mejor;
+		double pp;
+		do{
+			mejor = pop[0];
+			Camino[] otros = new Camino[this.poblacionMaxima/2];
+			for (int i = 0; i < otros.length; i++) {
+				otros[i] = pop[i];
 			}
-		}
-		return null;
-	}
-	
-	public int[] ejecutar() {
-		int[][] pop = this.crearPopulacion(); 
-		int[][] cruces = this.crearCruces(pop);
-		mutaciones(cruces);
-		return null;
+			Camino[] cruces = this.crearCruces(otros);
+			for (int i = cruces.length; i < pop.length; i++) {
+				pop[i] = cruces[i-cruces.length];
+			}
+			mutaciones(pop);
+			Arrays.sort(pop);
+			
+			try {
+				pp = pop[1].distancia();
+			} catch (Exception e) {
+				pp=-1;
+			}
+			
+		}while(pp!=-1);
+		return mejor;
 	}
 
 	

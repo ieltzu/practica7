@@ -3,6 +3,7 @@ package criterios;
 import java.util.ArrayList;
 
 import mutaciones.Swap;
+import practica7.Camino;
 import practica7.Tsp;
 
 public class Criterios {
@@ -13,14 +14,15 @@ public class Criterios {
 		this.tsp=tsp;
 	}
 	
-	public ArrayList<int[]> crearSwaps(int[] gan) {
-		ArrayList<int[]> nuevos = new ArrayList<int[]>();
+	public ArrayList<Camino> crearSwaps(Camino gan) {
+		ArrayList<Camino> nuevos = new ArrayList<Camino>();
 		Swap sp = new Swap();
 		for (int i = 0; i < this.tsp.getNumcities(); i++) {
 			for (int j = i; j < this.tsp.getNumcities(); j++) {
 				sp.setX(i);
 				sp.setY(j);
-				nuevos.add(sp.mutacion(gan));
+				Camino cc = sp.mutacion(gan);
+				nuevos.add(cc);
 			}
 		}
 		return nuevos;

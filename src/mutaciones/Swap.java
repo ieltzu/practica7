@@ -1,5 +1,7 @@
 package mutaciones;
 
+import practica7.Camino;
+
 public class Swap implements Mutacion{
 	
 	private int x,y;
@@ -18,10 +20,10 @@ public class Swap implements Mutacion{
 		this.y = y;
 	}
 	@Override
-	public int[] mutacion(int[] c) {
-		int[] copia = c.clone();
-		copia[x]=c[y];
-		copia[y]=c[x];
+	public Camino mutacion(Camino c) {
+		Camino copia = (Camino) c.clone();
+		copia.setPos(x, c.getPos(y));
+		copia.setPos(y, c.getPos(x));
 		return copia;
 	}
 	

@@ -1,9 +1,11 @@
 package criterios;
 
 import java.util.ArrayList;
+
+import practica7.Camino;
 import practica7.Tsp;
 
 public interface Criterio {
 	
-	public int[] evaluar();
+	public Camino evaluar();
 }
