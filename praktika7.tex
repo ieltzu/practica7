@@ -43,11 +43,7 @@ Como hemos recibido el archivo dantzig42 para desarrollar la práctica, vamos a a
 
 Para optimizar nuestras ciudades vamos a aplicar distintos criterios en el proceso. Empezaremos utilizando el criterio Best First y luego utilizaremos el Greedy, para la búsqueda local. Una vez conseguidos estos procesos, haremos el calculo de el algoritmo genético.  
 
-\section{Pseudocódigo del algoritmo:}
-
-1. Introducción.
-
-2. Algoritmo implementados: busqueda local y algoritmo genetico. Ojo, los pseudocódigos se utilizan para ilustrar las explicaciones dadas en el texto. Por si solos, no explican nada.
+\section{Explicación y Pseudocódigo del algoritmo:}
 
 3. Experimentación. (Las distintas configuraciones de parámetros que se han utilizado, y los resultados obtenidos. Cuantas repeticiones...)
 
@@ -55,48 +51,48 @@ Para optimizar nuestras ciudades vamos a aplicar distintos criterios en el proce
 
 P.D. Siguiendo a la buena costumbre de las practicas. Quiero que me entregueis un JAR con el codigo ( o dos JARs, uno por cada algoritmo). Cuando se ejecute el JAR, este repetira la optimizacion 10 veces, y devolvera la lista de resultados obtenidos, asi como la mejor solucion y el fitness medio de todas las soluciones obtenidas.
 
+En el algoritmo de búsqueda local se recibe una solución la cual se pretende optimizar. La solución recibida se utilizará para calcular una combinatoria de todos los swaps posibles entre dos de las ciudades del camino. Una vez calculados estos nuevos caminos, se buscará el mejor camino de todos, o el primero mejor que encontremos(Greedy,BestFirst) comparándolos con nuestra solución de entrada. Si encontramos un camino mejor que el de nuestra entrada, el camino, pasará a ser la nueva entrada, y así, seguiremos hasta que ningún vecino supere a nuestra solución de entrada.
+
 \begin{algorithm}[H] 
 \caption{Búsqueda Local} 
 \SetKwInOut{Input}{entrada} 
 \SetKwInOut{Output}{salida}
-\Input{} 
-\Output{ListaOrdenadaCiudades} 
-\While{$D_{Pos} = D_{Grow - Pos} \cup D_{Prune - Pos} \neq \emptyset$}{
-	 \tcp*[r]{Construir una nueva regla}
-	 Dividir $D$ en $(D_{Grow - Pos} \cup D_{Grow - Neg}) \cup (D_{Prune - Pos} \cup D_{Prune - Neg})$ \\
-	 Rule $_{:=}$ GrowRule($D_{Grow - Pos} \cup D_{Grow - Neg}$)\\
-	 Rule $_{:=}$ PruneRule($D_{Prune - Pos} \cup D_{Prune - Neg}$)\\
-	 \eIf{la tasa de error de Rule en $(D_{Prune - Pos} \cup D_{Prune - Neg}) > 50\%$}{
-	 	\Return RuleSet
+\Input{Listaciudades} 
+\Output{ListaCiudadesOptima} 
+\While{$Valor(ListaCiudades) >= Valor(ListaCiudadesOptima)$ \& $! TiempoComputacionalAcabado$ \& $! Numero de iteraciones máximo$}{
+	 $Combinatoria = CrearCombinatoriaDeSwaps()$\\
+	 $ListaCiudadesOptima = BusquedaMejorLista(Combinatoria)$\\
+	 \eIf{$ListaCiudadesOptima <= ListaCiudades$}{
+	 	\Return $ListaCiudades$
 	 }{
-	 	Añadir Rule a RuleSet\\
-		Borrar ejemplos cubiertos por Rule de $D$
-		
+	 	$ListaCiudades=ListaCiudadesOptima$\\
 	 }
 }
-\Return RuleSet
+\Return $ListaCiudades$
 \end{algorithm} 
+\\
+	En el algoritmo genético se recibe una población de soluciones para optimizar. 	Estas soluciones se ordenarán en base a su valor de salida(adaptación). Una vez obtenida la lista ordenada, se procederá a recoger la mitad de las muestras en sentido de valor de salida descendente. De estas muestras conseguidas, se harán cruces. Estos cruces crearán el mismo número de hijos que padres hemos cogido. Los hijos sufrirán mutaciones en el 30 por ciento de los casos(criterio establecido por nosotros) y se hará un nuevo conjunto de datos entre los padres y los hijos mutados y no mutados. De esta forma se obtendrá una población del mismo número de la que teníamos de entrada.\\
+
+El algoritmo puede converger en estos tres casos:
+\begin{itemize}
+	\item Tiempo computacional.
+	\item Numero de iteraciones.
+	\item Población de rasgos muy similares.
+\end{itemize}
+	
 
 \begin{algorithm}[H] 
-\caption{Busqueda Local} 
+\caption{Algoritmo Genético} 
 \SetKwInOut{Input}{entrada} 
 \SetKwInOut{Output}{salida}
-\Input{Secuencia$_1,...,$ secuencia$_n$.} 
-\Output{RuleSet} 
-\While{$D_{Pos} = D_{Grow - Pos} \cup D_{Prune - Pos} \neq \emptyset$}{
-	 \tcp*[r]{Construir una nueva regla}
-	 Dividir $D$ en $(D_{Grow - Pos} \cup D_{Grow - Neg}) \cup (D_{Prune - Pos} \cup D_{Prune - Neg})$ \\
-	 Rule $_{:=}$ GrowRule($D_{Grow - Pos} \cup D_{Grow - Neg}$)\\
-	 Rule $_{:=}$ PruneRule($D_{Prune - Pos} \cup D_{Prune - Neg}$)\\
-	 \eIf{la tasa de error de Rule en $(D_{Prune - Pos} \cup D_{Prune - Neg}) > 50\%$}{
-	 	\Return RuleSet
-	 }{
-	 	Añadir Rule a RuleSet\\
-		Borrar ejemplos cubiertos por Rule de $D$
-		
-	 }
+\Input{PoblacionListaCiudades} 
+\Output{PoblacionListaCiudadesMejoradas} 
+\While{$! TiempoComputacionalAcabado$ \& $! Numero de iteraciones máximo$}{
+	 $PoblacionOrdenada = OrdenarPoblacionListaCiudades()$\\
+	 $Cruces = CrearCruces(PoblacionOrdenada/2)$\\
+	 $mutaciones = CrearMutaciones(Cruces)$ 	\\	 $PoblaciónListaCiudadesMejoradas=ReemplazarMutacionesPorMuestrasDeBajoNivel(PoblacionOrdenada,Mutaciones)$\\
 }
-\Return RuleSet
+\Return &$PoblaciónListaCiudadesMejoradas$
 \end{algorithm} 
 
 \section{Experimentación y Resultados:}
@@ -117,11 +113,11 @@ Aquí escribimos conclusiones\\
 \end{figure}
 En cuanto al gráfico del tiempo vemos que cuanto más grande es el parámetro k el tiempo de ejecución para cada partición es mayor. Esto quiere decir, que cuantos más clusters existan, más distancias se deben de calcular entre los centroides y las instancias, por lo tanto, un mayor tiempo de ejecución. 
 \section{Conclusiones:}
-El algoritmo K-Means tiene una gran limitación, y es que es muy dependiente del conjunto de datos. Es un algoritmo sencillo de implementar pero pese a su simplicidad es bastante eficiente. Los algoritmos de evaluación interna SSE(p) y Silhouette son bastante completos, aunque a nuestro parecer el Silhouette es el mejor de los dos.
+
 	
 \section{Valoración Subjetiva:}
-\textbf{Ieltzu}:  Ha sido una práctica en la que no hemos invertido mucho tiempo. Los tres teníamos que haber estudiado los dos algoritmos, por lo tanto, no ha sido muy complicado implementarlo. Práctica interesante, pero en la época del año que nos ha pillado, para mi, sobraba.\\
-\textbf{Mikel}:
+\textbf{Ieltzu}: Ha sido una práctica en la que no hemos invertido mucho tiempo. Los tres teníamos que haber estudiado los dos algoritmos, por lo tanto, no ha sido muy complicado implementarlo. Práctica interesante, pero en la época del año que nos ha pillado, para mi, sobraba.\\
+\textbf{Mikel}: 
 
 
 \textbf{Maria}:
