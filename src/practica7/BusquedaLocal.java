@@ -21,7 +21,7 @@ public class BusquedaLocal {
 		this.tsp = tsp;
 	}
 	
-	public int[] ejecutar(){
+	public Camino ejecutar(){
 		Criterio cr;
 		if(this.criterio==criterios.Greedy){
 			cr = new Greedy(this.tsp);

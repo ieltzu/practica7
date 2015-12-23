@@ -130,7 +130,7 @@ public class Tsp
     	rutas.add((String)tp.op);
     }
     
-    public int[] crearMuestraAleatoria(){
+    public Camino crearMuestraAleatoria(){
     	ArrayList<Tuple> op = new ArrayList<Tuple>();
     	for (int i = 0; i < this.numcities; i++) {
 			for (int j = 0; j < this.numcities; j++) {
@@ -163,7 +163,7 @@ public class Tsp
 				citi[i++] = Integer.parseInt(j);
 			}
 		}
-    	  
+    	
     	
     	/*
     	int[] citi= new int[numcities];
@@ -177,7 +177,7 @@ public class Tsp
     		citi[i++]=todas.get(pos);
     		todas.remove(pos);
     	}*/
-    	return citi;
+    	return new Camino(citi);
     	
     }
 
@@ -237,25 +237,27 @@ public class Tsp
 			System.out.println();
 		}
     }
+    
+    public void resetLlamadas(){
+    	this.llamadas = 0;
+    }
  
     // Main method
     public static void main(String[] args){
         Tsp T = new Tsp("dantzig42.tsp");
+        Camino.setTsp(T);
         //T.printMatriz();
+        System.out.println("###########################");
         BusquedaLocal bl = new BusquedaLocal(BusquedaLocal.criterios.Greedy,T);
-        int [] sol = bl.ejecutar();
-        for (int i = 0; i < sol.length; i++) {
-        	System.out.print(sol[i]+", ");
-		}
-        try {
-			System.out.println("\nY el costo:"+ T.cost(sol));
-		} catch (Exception e) {
-			System.out.println("Se ha llegado al limite.");
-		}
-//        GeneticAlgorithm Ga = new GeneticAlgorithm(T, 50);
-//        int [] sol2 = Ga.ejecutar();
-//        for (int i = 0; i < sol2.length; i++) {
-//        	System.out.print(sol[i]+", ");
-//		}
+        T.resetLlamadas();
+        Camino sol = bl.ejecutar();
+        System.out.println(" Busqueda Local Greedy:");
+        System.out.println(sol.imprimir());
+        T.resetLlamadas();
+        System.out.println("###########################");
+        GeneticAlgorithm Ga = new GeneticAlgorithm(T, 50);
+        Camino sol2 = Ga.ejecutar();
+        System.out.println(" Genetic Algorithm:");
+        System.out.println(sol2.imprimir());
     }
 } 

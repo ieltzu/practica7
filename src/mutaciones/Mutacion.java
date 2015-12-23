@@ -1,8 +1,10 @@
 package mutaciones;
 
+import practica7.Camino;
+
 public interface Mutacion {
-	
-	public int[] mutacion(int[] c);
+
+	public Camino mutacion(Camino c);
 	
 	
 }
