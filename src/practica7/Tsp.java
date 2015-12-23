@@ -98,7 +98,7 @@ public class Tsp
 		}
     	for (int i = 0; i < c.size(); i++) {
 			for (int j = 0; j < c.size(); j++) {
-				if ( !(  h.contains(i+"") || b.contains(j+"")  ) ){
+				if (!(h.contains(c.get(i)+"") || b.contains(c.get(j)+"") || ( h.contains(c.get(j)+"") && b.contains(c.get(i)+"") ) ) ){
 					if(i!=j){
 						nuevos.add(new Tuple(c.get(i)+"-"+c.get(j),1.0/this.getDistance(Integer.parseInt(c.get(i)), Integer.parseInt(c.get(j)))));
 					}else{
@@ -107,7 +107,6 @@ public class Tsp
 				}
 			}
 		}
-    	System.out.println(nuevos.toString());
     	return nuevos;
     }
     private void añadirRuta(ArrayList<String> rutas, Tuple tp){
@@ -150,23 +149,23 @@ public class Tsp
 				Tuple js = op.get(i);
 				acum += js.valor;
 				if (acum>random){
-					System.out.println("---------------------------------"+js.op);
 					this.añadirRuta(result, js);
 					op=this.recalcularOpciones(result);
-					for (String string : result) {
-						System.out.println(string);
-					}
-					System.out.println("---------------------------------");
 					break;
 				}
 			}
     	}
-    	System.out.println(result.size());
+    	int[] citi= new int[numcities];
+    	int i = 0;
     	for (String string : result) {
-			System.out.println(string);
+    		String[] ops = string.split("-");
+    		for (String j : ops) {
+				citi[i++] = Integer.parseInt(j);
+			}
 		}
+    	  
     	
-    	
+    	/*
     	int[] citi= new int[numcities];
     	ArrayList<Integer> todas = new ArrayList<Integer>();
     	for (int i = 0; i < citi.length; i++) {
@@ -177,7 +176,7 @@ public class Tsp
     		int pos = (int) Math.floor(Math.random()*todas.size());
     		citi[i++]=todas.get(pos);
     		todas.remove(pos);
-    	}
+    	}*/
     	return citi;
     	
     }
