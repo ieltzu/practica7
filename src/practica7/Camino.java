@@ -64,6 +64,16 @@ public class Camino implements Comparable {
 		}
 		return this.dist;
 	}
+	
+	public int getIndexOf(int ciudad){
+		int i = -1;
+		for (int j = 0; j < cam.length; j++) {
+			if (cam[j]==ciudad){
+				i = j;
+			}
+		}
+		return i;
+	}
 
 	@Override
 	public int compareTo(Object o) {
