@@ -54,8 +54,8 @@ public class GeneticAlgorithm {
 	}
 
 	private Camino[] generarUnCruce(Camino uno, Camino dos){
-		System.out.println("Uno: "+uno.imprimir());
-		System.out.println("Dos: "+dos.imprimir());
+		//System.out.println("Uno: "+uno.imprimir());
+		//System.out.println("Dos: "+dos.imprimir());
 		int random = (int) Math.floor(Math.random()*((uno.paradas()/2)-1));
 		int[][] hijos = new int[2][uno.paradas()];
 		for (int i = 0; i < hijos.length; i++) {
@@ -64,16 +64,16 @@ public class GeneticAlgorithm {
 			}
 		}
 		int last=0;
-		int[][] ayudante = null;
+		//int[][] ayudante = null;
 		for (int i = 0; i < uno.paradas()/2; i++) {
 			last = i+random+1;
 			hijos[0][last] = uno.getPos(last);
 			hijos[1][last] = dos.getPos(last);
-			ayudante[0][i] = uno.getPos(last);
-			ayudante[1][i] = dos.getPos(last);
+			//ayudante[0][i] = uno.getPos(last);
+			//ayudante[1][i] = dos.getPos(last);
 		}
-		int fin=uno.paradas();
 		/*
+		int fin=uno.paradas();
 		for(int k=0;k<2;k++){
 			int pos=random+(uno.paradas()/2)+1;
 			for(int i=random+(uno.paradas()/2)+1;i<uno.paradas();i=i+0){
@@ -98,8 +98,14 @@ public class GeneticAlgorithm {
 		int tmp;
 		do{
 			tmp = uno.getIndexOf(dos.getPos(++last2 % hijos[0].length));
-			if (tmp<random+1 || tmp>random) hijos[0][++last1 % hijos[0].length] = 3; 
+			if (tmp<random+1 || tmp>random+(uno.paradas()/2)) hijos[0][++last1 % hijos[0].length] = dos.getPos(last2 % hijos[0].length); 
 		}while(!this.lleno(hijos[0]));
+		last1 = last;
+		last2 = last;
+		do{
+			tmp = dos.getIndexOf(uno.getPos(++last2 % hijos[1].length));
+			if (tmp<random+1 || tmp>random+(dos.paradas()/2)) hijos[1][++last1 % hijos[1].length] = uno.getPos(last2 % hijos[1].length); 
+		}while(!this.lleno(hijos[1]));
 		
 		return new Camino[]{new Camino(hijos[0]), new Camino(hijos[1])};
 	}
@@ -150,7 +156,6 @@ public class GeneticAlgorithm {
 			} catch (Exception e) {
 				pp=-1;
 			}
-			
 		}while(pp!=-1);
 		return mejor;
 	}

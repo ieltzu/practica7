@@ -255,7 +255,7 @@ public class Tsp
         System.out.println(sol.imprimir());
         T.resetLlamadas();
         System.out.println("###########################");
-        GeneticAlgorithm Ga = new GeneticAlgorithm(T, 50);
+        GeneticAlgorithm Ga = new GeneticAlgorithm(T, 2500);
         Camino sol2 = Ga.ejecutar();
         System.out.println(" Genetic Algorithm:");
         System.out.println(sol2.imprimir());
