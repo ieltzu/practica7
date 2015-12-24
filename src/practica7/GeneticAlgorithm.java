@@ -41,6 +41,17 @@ public class GeneticAlgorithm {
 			
 		}
 	}
+	
+	private boolean lleno(int[] arr){
+		boolean ret = true;
+		for (int i : arr) {
+			if (i==-1){
+				ret=false;
+				break;
+			}
+		}
+		return ret;
+	}
 
 	private Camino[] generarUnCruce(Camino uno, Camino dos){
 		System.out.println("Uno: "+uno.imprimir());
@@ -52,48 +63,20 @@ public class GeneticAlgorithm {
 				hijos[i][j]=-1;
 			}
 		}
-		int pos;
+		int last=0;
 		for (int i = 0; i < uno.paradas()/2; i++) {
-			hijos[0][i+random+1] = uno.getPos(i+random+1);
-			pos = i+random+1;
-			do {
-				pos = dos.getIndexOf(uno.getPos(pos));
-			}while(!(pos<random+1 || pos > random+(uno.paradas()/2) || pos==i+random+1));
-			hijos[0][pos] = dos.getPos(i+random+1);
-			hijos[1][i+random+1] = dos.getPos(i+random+1);
-			pos = i+random+1;
-			do {
-				pos = uno.getIndexOf(dos.getPos(pos));
-			}while(!(pos<random+1 || pos > random+(dos.paradas()/2) || pos==i+random+1));
-			hijos[0][pos] = uno.getPos(i+random+1);
+			last = i+random+1;
+			hijos[0][last] = uno.getPos(last);
+			hijos[1][last] = dos.getPos(last);
 		}
+		int last1 = last;
+		int last2 = last;
+		int tmp;
+		do{
+			tmp = uno.getIndexOf(dos.getPos(++last2 % hijos[0].length));
+			if (tmp<random+1 || tmp>random) hijos[0][++last1 % hijos[0].length] = 3; 
+		}while(!this.lleno(hijos[0]));
 		
-		for (int i = 0; i < hijos.length; i++) {
-			System.out.print((i+1)+": [");
-			for (int j = 0; j < hijos[i].length; j++) {
-				System.out.print(hijos[i][j]+",");
-			}
-			System.out.println("]");
-		}
-		
-		for (int i = 0; i < hijos.length; i++) {
-			for (int j = 0; j < hijos[i].length; j++) {
-				if(hijos[i][j]==-1){
-					if (i==0){
-						hijos[i][j] = dos.getPos(j);
-					}else{
-						hijos[i][j] = uno.getPos(j);
-					}
-				}
-			}
-		}
-		for (int i = 0; i < hijos.length; i++) {
-			System.out.print((i+1)+": [");
-			for (int j = 0; j < hijos[i].length; j++) {
-				System.out.print(hijos[i][j]+",");
-			}
-			System.out.println("]");
-		}
 		return new Camino[]{new Camino(hijos[0]), new Camino(hijos[1])};
 	}
 	
