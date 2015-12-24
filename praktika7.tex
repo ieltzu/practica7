@@ -44,13 +44,13 @@ Como hemos recibido el archivo dantzig42 para desarrollar la práctica, vamos a a
 Para optimizar nuestras ciudades vamos a aplicar distintos criterios en el proceso. Empezaremos utilizando el criterio Best First y luego utilizaremos el Greedy, para la búsqueda local. Una vez conseguidos estos procesos, haremos el calculo de el algoritmo genético.  
 
 \section{Explicación y Pseudocódigo del algoritmo:}
-
+QUITAR QUITAR
 3. Experimentación. (Las distintas configuraciones de parámetros que se han utilizado, y los resultados obtenidos. Cuantas repeticiones...)
 
 4. Explicar las conclusiones obtenidas, haciendo especial énfasis en el mejor diseño conseguido. ¿Cual de los dos algoritmos funciona mejor sobre la instancia proporcionada? ¿Podría decirse que uno de los algoritmos es significativamente mejor que otro?
 
 P.D. Siguiendo a la buena costumbre de las practicas. Quiero que me entregueis un JAR con el codigo ( o dos JARs, uno por cada algoritmo). Cuando se ejecute el JAR, este repetira la optimizacion 10 veces, y devolvera la lista de resultados obtenidos, asi como la mejor solucion y el fitness medio de todas las soluciones obtenidas.
-
+QUITAR QUITAR
 En el algoritmo de búsqueda local se recibe una solución la cual se pretende optimizar. La solución recibida se utilizará para calcular una combinatoria de todos los swaps posibles entre dos de las ciudades del camino. Una vez calculados estos nuevos caminos, se buscará el mejor camino de todos, o el primero mejor que encontremos(Greedy,BestFirst) comparándolos con nuestra solución de entrada. Si encontramos un camino mejor que el de nuestra entrada, el camino, pasará a ser la nueva entrada, y así, seguiremos hasta que ningún vecino supere a nuestra solución de entrada.
 
 \begin{algorithm}[H] 
@@ -73,25 +73,20 @@ En el algoritmo de búsqueda local se recibe una solución la cual se pretende opt
 \\
 	En el algoritmo genético se recibe una población de soluciones para optimizar. 	Estas soluciones se ordenarán en base a su valor de salida(adaptación). Una vez obtenida la lista ordenada, se procederá a recoger la mitad de las muestras en sentido de valor de salida descendente. De estas muestras conseguidas, se harán cruces. Estos cruces crearán el mismo número de hijos que padres hemos cogido.
 
-	Para hacer los cruces hemos utilizado el algoritmo PMX (Partially Mapped Crossover). En este algoritmo un segmento de uno de los padres pasará en orden al hijo. La información restante ocupará los trozos de información vacíos siempre que la información no este ya incluida en el primer segmento. He aquí el algoritmo.
+	Para hacer los cruces hemos utilizado el algoritmo Order 1 CrossOver. En este algoritmo un segmento de uno de los padres pasará en orden al hijo. La información restante ocupará los trozos de información vacíos siempre que la información no este ya incluida en el primer segmento. He aquí el algoritmo.
 
 \begin{algorithm}[H] 
-\caption{PMX: Partially Mapped Crossover} 
+\caption{Order 1 CrossOver} 
 \SetKwInOut{Input}{entrada} 
 \SetKwInOut{Output}{salida}
 \Input{ListaCiudades1(P1),ListaCiudades2(P2)} 
 \Output{ListaCiudadesHijo1,ListaCiudadesHijo2} 
 \While{$Numerohijos<2$}{
-	 Elegir segmento de azar y copiarlo de P1 \\
-	 Comenzando desde el primer punto de cruce buscar elementos en ese segmento de P2 que no han sido copiadas \\
-
-	\For{$Para cada elemento$}{ 
-		 buscar en la descendencia para ver qué elemento j ha sido copiado en su lugar de P1 \\
-		 Coloque i en la posición ocupada por j en P2, ya que sabemos que no tendremos que poner j allí \\
-		\If {$el lugar ocupado por j en P2 ya ha sido rellenado en la descendencia k$}{
-			poner i en la posición ocupada por k en P2 \\
+	 Elegir segmento de azar y copiarlo de P1 en hijo\\
+	\For{$Para cada elemento fuera del segmento, empezando desde el final del segmento$}{ 
+		\If {$el elemento seleccionado de P2 no está en el segmento seleccionado de P1$}{
+			colocarlo en orden después del segmento en P3(si lista está llena se empezará desde el principio hasta el principio del segmento)\\
 		}\\
-		Después de haber tratado con los elementos del segmento crossover, el resto de la descendencia se puede llenar desde P2 \\
 	}
 }
 \Return $ListaCiudadeshijo1,ListaCiudadesHijo2$

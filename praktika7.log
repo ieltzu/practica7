@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.9.30)  23 DEC 2015 22:59
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (MiKTeX 2.9) (preloaded format=pdflatex 2015.9.30)  24 DEC 2015 15:08
 entering extended mode
 **praktika7.tex
 (praktika7.tex
@@ -335,32 +335,54 @@ or  <return>  to continue without it.
 
 {C:/Users/ieltzu/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
 
+LaTeX Warning: Command \' invalid in math mode on input line 92.
+
+! Please use \mathaccent for accents in math mode.
+\add@accent ...@spacefactor \spacefactor }\accent 
+                                                  #1 #2\egroup \spacefactor ...
+l.92 \Return
+             $ListaCiudadeshijo1,ListaCiudadesHijo2$
+I'm changing \accent to \mathaccent here; wish me luck.
+(Accents are not the same in formulas as they are in text.)
+
+! You can't use `\spacefactor' in math mode.
+\add@accent ...}\accent #1 #2\egroup \spacefactor 
+                                                  \accent@spacefactor 
+l.92 \Return
+             $ListaCiudadeshijo1,ListaCiudadesHijo2$
+Sorry, but I'm not programmed to handle this case;
+I'll just pretend that you didn't ask for it.
+If you're in the wrong mode, you might be able to
+return to the right one by typing `I}' or `I$' or `I\par'.
+
+Missing character: There is no è in font cmex10!
+
 ! LaTeX Error: There's no line here to end.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.97 \Return
+l.92 \Return
              $ListaCiudadeshijo1,ListaCiudadesHijo2$
 Your command was ignored.
 Type  I <command> <return>  to replace it with another command,
 or  <return>  to continue without it.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 100--101
+Underfull \hbox (badness 10000) in paragraph at lines 95--96
 
  []
 
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 104.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 99.
 
-LaTeX Warning: Command \' invalid in math mode on input line 121.
+LaTeX Warning: Command \' invalid in math mode on input line 116.
 
 ! Please use \mathaccent for accents in math mode.
 \add@accent ...@spacefactor \spacefactor }\accent 
                                                   #1 #2\egroup \spacefactor ...
-l.121 \Return
+l.116 \Return
               &$PoblaciónListaCiudadesMejoradas$
 I'm changing \accent to \mathaccent here; wish me luck.
 (Accents are not the same in formulas as they are in text.)
@@ -368,7 +390,7 @@ I'm changing \accent to \mathaccent here; wish me luck.
 ! You can't use `\spacefactor' in math mode.
 \add@accent ...}\accent #1 #2\egroup \spacefactor 
                                                   \accent@spacefactor 
-l.121 \Return
+l.116 \Return
               &$PoblaciónListaCiudadesMejoradas$
 Sorry, but I'm not programmed to handle this case;
 I'll just pretend that you didn't ask for it.
@@ -377,12 +399,12 @@ return to the right one by typing `I}' or `I$' or `I\par'.
 
 Missing character: There is no è in font cmex10!
 
-LaTeX Warning: Command \' invalid in math mode on input line 121.
+LaTeX Warning: Command \' invalid in math mode on input line 116.
 
 ! Please use \mathaccent for accents in math mode.
 \add@accent ...@spacefactor \spacefactor }\accent 
                                                   #1 #2\egroup \spacefactor ...
-l.121 \Return
+l.116 \Return
               &$PoblaciónListaCiudadesMejoradas$
 I'm changing \accent to \mathaccent here; wish me luck.
 (Accents are not the same in formulas as they are in text.)
@@ -390,7 +412,7 @@ I'm changing \accent to \mathaccent here; wish me luck.
 ! You can't use `\spacefactor' in math mode.
 \add@accent ...}\accent #1 #2\egroup \spacefactor 
                                                   \accent@spacefactor 
-l.121 \Return
+l.116 \Return
               &$PoblaciónListaCiudadesMejoradas$
 Sorry, but I'm not programmed to handle this case;
 I'll just pretend that you didn't ask for it.
@@ -401,7 +423,7 @@ Missing character: There is no è in font cmex10!
 ! Misplaced alignment tab character &.
 <recently read> &
                  
-l.121 \Return &
+l.116 \Return &
                $PoblaciónListaCiudadesMejoradas$
 I can't figure out why you would want to use a tab mark
 here. If you just want an ampersand, the remedy is
@@ -411,12 +433,12 @@ you're probably due for more error messages, and you
 might try typing `S' now just to see what is salvageable.
 
 
-LaTeX Warning: Command \' invalid in math mode on input line 121.
+LaTeX Warning: Command \' invalid in math mode on input line 116.
 
 ! Please use \mathaccent for accents in math mode.
 \add@accent ...@spacefactor \spacefactor }\accent 
                                                   #1 #2\egroup \spacefactor ...
-l.121 \Return &$Població
+l.116 \Return &$Població
                         nListaCiudadesMejoradas$
 I'm changing \accent to \mathaccent here; wish me luck.
 (Accents are not the same in formulas as they are in text.)
@@ -424,7 +446,7 @@ I'm changing \accent to \mathaccent here; wish me luck.
 ! You can't use `\spacefactor' in math mode.
 \add@accent ...}\accent #1 #2\egroup \spacefactor 
                                                   \accent@spacefactor 
-l.121 \Return &$Població
+l.116 \Return &$Població
                         nListaCiudadesMejoradas$
 Sorry, but I'm not programmed to handle this case;
 I'll just pretend that you didn't ask for it.
@@ -433,7 +455,7 @@ return to the right one by typing `I}' or `I$' or `I\par'.
 
 Missing character: There is no è in font cmex10!
 
-LaTeX Warning: File `./grafica1.png' not found on input line 130.
+LaTeX Warning: File `./grafica1.png' not found on input line 125.
 
 
 ! Package pdftex.def Error: File `./grafica1.png' not found.
@@ -442,7 +464,7 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.130 ...hics[width=0.6\textwidth]{./grafica1.png}
+l.125 ...hics[width=0.6\textwidth]{./grafica1.png}
                                                   
 Using draft setting for this image.
 Try typing  <return>  to proceed.
@@ -450,7 +472,7 @@ If that doesn't work, type  X <return>  to quit.
 
 [2]
 
-LaTeX Warning: File `./grafica2.png' not found on input line 138.
+LaTeX Warning: File `./grafica2.png' not found on input line 133.
 
 
 ! Package pdftex.def Error: File `./grafica2.png' not found.
@@ -459,14 +481,14 @@ See the pdftex.def package documentation for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.138 ...hics[width=0.6\textwidth]{./grafica2.png}
+l.133 ...hics[width=0.6\textwidth]{./grafica2.png}
                                                   
 Using draft setting for this image.
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 133--139
+Underfull \hbox (badness 10000) in paragraph at lines 128--134
 
  []
 
@@ -474,8 +496,8 @@ Underfull \hbox (badness 10000) in paragraph at lines 133--139
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.155 ...ttp://www.herrera.unt.edu.ar/gapia/Curso_
-                                                  AG/Curso_AG_08_Clase_5.pdf\\
+l.150 ...ttp://www.herrera.unt.edu.ar/gapia/Curso_
+                                                  AG/Curso_AG_08_Clase_5.pdf
 I've inserted a begin-math/end-math symbol since I think
 you left one out. Proceed, with fingers crossed.
 
@@ -486,7 +508,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.156 	\item
+l.151 	\item
              http://www.sc.ehu.es/ccwbayes/docencia/mmcc/docs/t2geneticos.pdf
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -498,7 +520,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.156 	\item h
+l.151 	\item h
               ttp://www.sc.ehu.es/ccwbayes/docencia/mmcc/docs/t2geneticos.pdf
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -510,7 +532,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.156 	\item h
+l.151 	\item h
               ttp://www.sc.ehu.es/ccwbayes/docencia/mmcc/docs/t2geneticos.pdf
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -522,7 +544,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.157 \end{itemize}
+l.152 \end{itemize}
                    
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -534,7 +556,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.157 \end{itemize}
+l.152 \end{itemize}
                    
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -546,7 +568,7 @@ See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.157 \end{itemize}
+l.152 \end{itemize}
                    
 Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -554,13 +576,21 @@ If that doesn't work, type  X <return>  to quit.
 ! Missing $ inserted.
 <inserted text> 
                 $
-l.157 \end{itemize}
+l.152 \end{itemize}
                    
 I've inserted something that you may have forgotten.
 (See the <inserted text> above.)
 With luck, this will get me unwedged. But if you
 really didn't forget anything, try typing `2' now; then
 my insertion and my current dilemma will both disappear.
+
+
+Overfull \hbox (103.18819pt too wide) in paragraph at lines 150--153
+[]\OT1/cmr/m/n/10 http://www.herrera.unt.edu.ar/gapia/Curso$[]\OML/cmm/m/it/10 
+G=Curso[]G[]\OT1/cmr/m/n/10 8[]\OML/cmm/m/it/10 lase[]:pdfhttp \OT1/cmr/m/n/10 
+: \OML/cmm/m/it/10 ==www:sc:ehu:es=ccwbayes=docencia=mmcc=docs=t\OT1/cmr/m/n/10
+ 2\OML/cmm/m/it/10 geneticos:pdf$ 
+ []
 
 [4] (praktika7.aux) )
 (\end occurred inside a group at level 1)
@@ -574,7 +604,7 @@ Here is how much of TeX's memory you used:
  7023 multiletter control sequences out of 15000+200000
  12017 words of font info for 47 fonts, out of 3000000 for 9000
  1025 hyphenation exceptions out of 8191
- 28i,16n,32p,602b,1640s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 28i,16n,32p,602b,1646s stack positions out of 5000i,500n,10000p,200000b,50000s
 <C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/
 cm/cmbx10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
 /cmbx12.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
@@ -588,7 +618,7 @@ ram Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Program
  Files (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Program Fi
 les (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmti10.pfb><C:/Program File
 s (x86)/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on praktika7.pdf (4 pages, 155206 bytes).
+Output written on praktika7.pdf (4 pages, 154545 bytes).
 PDF statistics:
  67 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
