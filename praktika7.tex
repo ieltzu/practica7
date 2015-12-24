@@ -47,8 +47,6 @@ Para optimizar nuestras ciudades vamos a aplicar distintos criterios en el proce
 QUITAR QUITAR
 3. Experimentación. (Las distintas configuraciones de parámetros que se han utilizado, y los resultados obtenidos. Cuantas repeticiones...)
 
-4. Explicar las conclusiones obtenidas, haciendo especial énfasis en el mejor diseño conseguido. ¿Cual de los dos algoritmos funciona mejor sobre la instancia proporcionada? ¿Podría decirse que uno de los algoritmos es significativamente mejor que otro?
-
 P.D. Siguiendo a la buena costumbre de las practicas. Quiero que me entregueis un JAR con el codigo ( o dos JARs, uno por cada algoritmo). Cuando se ejecute el JAR, este repetira la optimizacion 10 veces, y devolvera la lista de resultados obtenidos, asi como la mejor solucion y el fitness medio de todas las soluciones obtenidas.
 QUITAR QUITAR
 En el algoritmo de búsqueda local se recibe una solución la cual se pretende optimizar. La solución recibida se utilizará para calcular una combinatoria de todos los swaps posibles entre dos de las ciudades del camino. Una vez calculados estos nuevos caminos, se buscará el mejor camino de todos, o el primero mejor que encontremos(Greedy,BestFirst) comparándolos con nuestra solución de entrada. Si encontramos un camino mejor que el de nuestra entrada, el camino, pasará a ser la nueva entrada, y así, seguiremos hasta que ningún vecino supere a nuestra solución de entrada.
@@ -71,9 +69,9 @@ En el algoritmo de búsqueda local se recibe una solución la cual se pretende opt
 \Return $ListaCiudades$
 \end{algorithm} 
 \\
-	En el algoritmo genético se recibe una población de soluciones para optimizar. 	Estas soluciones se ordenarán en base a su valor de salida(adaptación). Una vez obtenida la lista ordenada, se procederá a recoger la mitad de las muestras en sentido de valor de salida descendente. De estas muestras conseguidas, se harán cruces. Estos cruces crearán el mismo número de hijos que padres hemos cogido.
+	En el algoritmo genético se recibe una población de soluciones para optimizar. 	Estas soluciones se ordenarán en base a su valor de salida(adaptación). Una vez obtenida la lista ordenada, se procederá a recoger la mitad de las muestras en sentido de valor de salida descendente. De estas muestras conseguidas, se harán cruces. Estos cruces crearán el mismo número de hijos que padres hemos cogido.\\
 
-	Para hacer los cruces hemos utilizado el algoritmo Order 1 CrossOver. En este algoritmo un segmento de uno de los padres pasará en orden al hijo. La información restante ocupará los trozos de información vacíos siempre que la información no este ya incluida en el primer segmento. He aquí el algoritmo.
+	Para hacer los cruces hemos utilizado el algoritmo Order 1 CrossOver. En este algoritmo un segmento de uno de los padres pasará en orden al hijo. La información restante ocupará los trozos de información vacíos siempre que la información no este ya incluida en el primer segmento. He aquí el algoritmo.\\\\
 
 \begin{algorithm}[H] 
 \caption{Order 1 CrossOver} 
@@ -126,15 +124,13 @@ Hemos ejecutado el programa y nos han salido estos resultados:
 \end{figure}
 
 Aquí escribimos conclusiones\\
-\begin{figure}[H]
-\caption{gráfico 2}
-\label{figura1} 
-\centering
-\includegraphics[width=0.6\textwidth]{./grafica2.png}
-\end{figure}
-En cuanto al gráfico del tiempo vemos que cuanto más grande es el parámetro k el tiempo de ejecución para cada partición es mayor. Esto quiere decir, que cuantos más clusters existan, más distancias se deben de calcular entre los centroides y las instancias, por lo tanto, un mayor tiempo de ejecución. 
-\section{Conclusiones:}
 
+\section{Conclusiones:}
+Implementar los algoritmos nos ha llevado a sacar varias conclusiones. El algoritmo de búsqueda local usando Greedy o BestFirst como criterio es mucho más fácil de implementar que el algoritmo genético. Planificar los cruces ha sido la parte mas costosa del problema en los algoritmos genéticos. Una vez que se sabe como funciona bien el algoritmo es sencillo implementarlo.\\ 
+El algoritmo genético ofrece mejores resultados que el de búsqueda local. Según el numero de población va aumentando los resultados de los algoritmos genéticos aumenta, al igual que su costo computacional. 
+La búsqueda local ofrece un resultado bueno sin mucho costo computacional. Si les diéramos el mismo tiempo de ejecución a los dos algoritmos sin duda el algoritmo de búsqueda local daría mejores resultados.
+Respondiendo a la pregunta de que algoritmo funciona mejor con la solución base, la respuesta es el algoritmo genético aunque no ofrece unos resultados tan diferentes como esperábamos.\\
+En nuestra opinión no es un algoritmo que sea mejor, simplemente que con un mayor número de iteraciones y mayor tiempo computacional ofrece mejores resultados que la búsqueda local, ya que, este algoritmo no mejora tanto aunque el tiempo computacional aumente considerablemente.\\  
 	
 \section{Valoración Subjetiva:}
 \textbf{Ieltzu}: Ha sido una práctica en la que no hemos invertido mucho tiempo. Los tres teníamos que haber estudiado los dos algoritmos, por lo tanto, no ha sido muy complicado implementarlo. Práctica interesante, pero en la época del año que nos ha pillado, para mi, sobraba.\\
@@ -148,6 +144,7 @@ En cuanto al gráfico del tiempo vemos que cuanto más grande es el parámetro k el
 \section*{Bibliografia}
 \begin{itemize}
 	\item http://www.herrera.unt.edu.ar/gapia/Curso_AG/Curso_AG_08_Clase_5.pdf
+	\item \\
 	\item http://www.sc.ehu.es/ccwbayes/docencia/mmcc/docs/t2geneticos.pdf
 \end{itemize}
 

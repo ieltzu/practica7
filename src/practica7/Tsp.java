@@ -109,8 +109,8 @@ public class Tsp
 		}
     	return nuevos;
     }
-    private void a√±adirRuta(ArrayList<String> rutas, Tuple tp){
-    	int a√±adidos = 0;
+    private void aÒadirRuta(ArrayList<String> rutas, Tuple tp){
+    	int aÒadidos = 0;
     	int tpa = Integer.parseInt(((String) tp.op).split("-")[0]);
     	int tpb = Integer.parseInt(((String) tp.op).split("-")[((String) tp.op).split("-").length-1]);
     	int sa,sb;
@@ -149,7 +149,7 @@ public class Tsp
 				Tuple js = op.get(i);
 				acum += js.valor;
 				if (acum>random){
-					this.a√±adirRuta(result, js);
+					this.aÒadirRuta(result, js);
 					op=this.recalcularOpciones(result);
 					break;
 				}

@@ -64,11 +64,35 @@ public class GeneticAlgorithm {
 			}
 		}
 		int last=0;
+		int[][] ayudante = null;
 		for (int i = 0; i < uno.paradas()/2; i++) {
 			last = i+random+1;
 			hijos[0][last] = uno.getPos(last);
 			hijos[1][last] = dos.getPos(last);
+			ayudante[0][i] = uno.getPos(last);
+			ayudante[1][i] = dos.getPos(last);
 		}
+		int fin=uno.paradas();
+		/*
+		for(int k=0;k<2;k++){
+			int pos=random+(uno.paradas()/2)+1;
+			for(int i=random+(uno.paradas()/2)+1;i<uno.paradas();i=i+0){
+				if(!contiene(ayudante[0],dos.getIndexOf(i))){
+					hijos[k][i] = dos.getIndexOf(pos);
+					i++;
+					pos++;
+				}else{
+					pos++;
+				}
+				if(pos>uno.paradas()){
+					pos=0;
+				}
+			}
+			for (int i =0; i < random+1; i++) {
+				if(!contiene(ayudante[0],dos.getIndexOf(i)))
+					hijos[k][i] =  
+			}
+		}*/
 		int last1 = last;
 		int last2 = last;
 		int tmp;
@@ -79,7 +103,14 @@ public class GeneticAlgorithm {
 		
 		return new Camino[]{new Camino(hijos[0]), new Camino(hijos[1])};
 	}
-	
+	private boolean contiene(int[] array, int num){
+		for (int i = 0; i < array.length; i++) {
+			if(array[i] == num){
+				return true;
+			}
+		}
+		return false;
+	}
 	private Camino[] crearCruces(Camino[] pop) {
 		Camino[] retu = pop.clone();
 		ArrayList<Integer> numeros = new ArrayList<Integer>();
