@@ -13,41 +13,23 @@ public class Greedy  extends Criterios implements Criterio{
 	
 	@Override
 	public Camino evaluar(){
-		Camino ganadora = this.tsp.crearMuestraAleatoria();
+		Camino ganadora = this.tsp.crearMuestraAleatoria(true);
 		System.out.println("Inicial:");
 		System.out.println(ganadora.imprimir());
-		ArrayList<Camino> swaps = this.crearSwaps(ganadora);
-		double costo=Double.MAX_VALUE;
-		try {
-			costo = ganadora.distancia();
-		} catch (Exception e1) {
-		}
-		boolean mejorado=true;
-		double costotmp=Double.MAX_VALUE;
-		double costolocal;
+		Camino tmp;
 		do{
-			Camino ganlocal = null;
-			costolocal=Double.MAX_VALUE;
-			for (Camino is : swaps) {
+			tmp = ganadora;
+			ArrayList<Camino> swaps = this.crearSwaps(ganadora);
+			for (Camino camino : swaps) {
 				try {
-					costotmp = is.distancia();
-					if (costotmp<costolocal){
-						costolocal=costotmp;
-						ganlocal=is;
+					if (camino.distancia()<ganadora.distancia()){
+						ganadora = camino;
 					}
 				} catch (Exception e) {
-					mejorado=false;
 					break;
 				}
 			}
-			if(costolocal>=costo){
-				mejorado=false;
-			}else{
-				costo=costolocal;
-				ganadora = ganlocal;
-				swaps = this.crearSwaps(ganadora);
-			}
-		}while(mejorado);
+		}while(!ganadora.equals(tmp));
 		return ganadora;
 	}
 

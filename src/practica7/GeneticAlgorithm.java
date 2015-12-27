@@ -2,7 +2,6 @@ package practica7;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 
 import mutaciones.Swap;
 
@@ -19,7 +18,7 @@ public class GeneticAlgorithm {
 	private Camino[] crearPopulacion() {
 		Camino[] pop = new Camino[this.poblacionMaxima];
 		for (int i = 0; i < this.poblacionMaxima; i++) {
-			pop[i] = tsp.crearMuestraAleatoria();;
+			pop[i] = tsp.crearMuestraAleatoria(true);
 		}
 		return pop;
 	}
@@ -54,8 +53,6 @@ public class GeneticAlgorithm {
 	}
 
 	private Camino[] generarUnCruce(Camino uno, Camino dos){
-		System.out.println("Uno: "+uno.imprimir());
-		System.out.println("Dos: "+dos.imprimir());
 		int random = (int) Math.floor(Math.random()*((uno.paradas()/2)-1));
 		int[][] hijos = new int[2][uno.paradas()];
 		for (int i = 0; i < hijos.length; i++) {

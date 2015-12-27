@@ -13,46 +13,25 @@ public class BestFirst extends Criterios implements Criterio{
 	
 	@Override
 	public Camino evaluar() {
-		Camino ganadora = tsp.crearMuestraAleatoria();
-		ArrayList<Camino> swaps = this.crearSwaps(ganadora);
-		double costo=0;
-		try {
-			costo = ganadora.distancia();
-		} catch (Exception e1) {
-		}
-		boolean mejorado=true;
-		double costotmp=Double.MAX_VALUE;
-		double costolocal;
-//		int loop =0;
+		Camino ganadora = tsp.crearMuestraAleatoria(true);
+		System.out.println("Inicial:");
+		System.out.println(ganadora.imprimir());
+		Camino tmp;
 		do{
-			Camino ganlocal = null;
-			costolocal=Double.MAX_VALUE;
-			for (Camino is : swaps) {
+			tmp = ganadora;
+			ArrayList<Camino> swaps = this.crearSwaps(ganadora);
+			for (Camino camino : swaps) {
 				try {
-					costotmp = is.distancia();
+					if (camino.distancia()<ganadora.distancia()){
+						ganadora = camino;
+						break;
+					}
 				} catch (Exception e) {
-					mejorado = false;
-					break;
-				}
-				if (costotmp<costolocal){
-					costolocal=costotmp;
-					ganlocal=is;
 					break;
 				}
 			}
-			if(costolocal>=costo){
-				mejorado=false;
-			}else{
-				costo=costolocal;
-				ganadora = ganlocal;
-				swaps = this.crearSwaps(ganadora);
-			}
-//			System.out.print(loop++ + " - " + costo + " - ");
-//			for (int i = 0; i < ganadora.length; i++) {
-//	        	System.out.print(ganadora[i]+", ");
-//			}
-			//System.out.println();
-		}while(mejorado);
+		}while(!ganadora.equals(tmp));
+
 		return ganadora;
 	}
 

@@ -52,8 +52,8 @@ public class Camino implements Comparable {
 	
 	public boolean equals(Camino c){
 		boolean iguales = this.cam.equals(c.cam);
-		if (this.dist!=-1) c.dist=this.dist;
-		if (c.dist!=-1) this.dist=c.dist;
+		if (iguales && this.dist!=-1) c.dist=this.dist;
+		if (iguales && c.dist!=-1) this.dist=c.dist;
 		return iguales;
 	}
 	

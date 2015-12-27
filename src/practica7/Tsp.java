@@ -130,53 +130,53 @@ public class Tsp
     	rutas.add((String)tp.op);
     }
     
-    public Camino crearMuestraAleatoria(){
-    	ArrayList<Tuple> op = new ArrayList<Tuple>();
-    	for (int i = 0; i < this.numcities; i++) {
-			for (int j = 0; j < this.numcities; j++) {
-				if(i!=j){
-					op.add(new Tuple(i+"-"+j,1.0/this.getDistance(i, j)));
-				}else{
-					op.add(new Tuple(i+"",1.0/200));
-				}
+    public Camino crearMuestraAleatoria(boolean sesgado){
+    	int[] citi= new int[numcities];
+    	if (sesgado){
+    		ArrayList<Tuple> op = new ArrayList<Tuple>();
+        	for (int i = 0; i < this.numcities; i++) {
+    			for (int j = 0; j < this.numcities; j++) {
+    				if(i!=j){
+    					op.add(new Tuple(i+"-"+j,1.0/this.getDistance(i, j)));
+    				}else{
+    					op.add(new Tuple(i+"",1.0/200));
+    				}
+    			}
+    		}
+        	ArrayList<String> result = new ArrayList<String>();
+        	while (op.size()>0){
+        		double random = Math.random()*this.suma(op);
+        		double acum=0;
+        		for (int i = 0; i < op.size(); i++) {
+    				Tuple js = op.get(i);
+    				acum += js.valor;
+    				if (acum>random){
+    					this.añadirRuta(result, js);
+    					op=this.recalcularOpciones(result);
+    					break;
+    				}
+    			}
+        	}
+        	int i = 0;
+        	for (String string : result) {
+        		String[] ops = string.split("-");
+        		for (String j : ops) {
+    				citi[i++] = Integer.parseInt(j);
+    			}
+    		}
+    		
+    	}else{
+	    	ArrayList<Integer> todas = new ArrayList<Integer>();
+	    	for (int i = 0; i < citi.length; i++) {
+				todas.add(i);
 			}
-		}
-    	ArrayList<String> result = new ArrayList<String>();
-    	while (op.size()>0){
-    		double random = Math.random()*this.suma(op);
-    		double acum=0;
-    		for (int i = 0; i < op.size(); i++) {
-				Tuple js = op.get(i);
-				acum += js.valor;
-				if (acum>random){
-					this.añadirRuta(result, js);
-					op=this.recalcularOpciones(result);
-					break;
-				}
-			}
+	    	int i=0;
+	    	while(todas.size()!=0){
+	    		int pos = (int) Math.floor(Math.random()*todas.size());
+	    		citi[i++]=todas.get(pos);
+	    		todas.remove(pos);
+	    	}
     	}
-    	int[] citi= new int[numcities];
-    	int i = 0;
-    	for (String string : result) {
-    		String[] ops = string.split("-");
-    		for (String j : ops) {
-				citi[i++] = Integer.parseInt(j);
-			}
-		}
-    	
-    	
-    	/*
-    	int[] citi= new int[numcities];
-    	ArrayList<Integer> todas = new ArrayList<Integer>();
-    	for (int i = 0; i < citi.length; i++) {
-			todas.add(i);
-		}
-    	int i=0;
-    	while(todas.size()!=0){
-    		int pos = (int) Math.floor(Math.random()*todas.size());
-    		citi[i++]=todas.get(pos);
-    		todas.remove(pos);
-    	}*/
     	return new Camino(citi);
     	
     }
@@ -252,6 +252,13 @@ public class Tsp
         T.resetLlamadas();
         Camino sol = bl.ejecutar();
         System.out.println(" Busqueda Local Greedy:");
+        System.out.println(sol.imprimir());
+        T.resetLlamadas();
+        System.out.println("###########################");
+        bl = new BusquedaLocal(BusquedaLocal.criterios.BestFirst,T);
+        T.resetLlamadas();
+        sol = bl.ejecutar();
+        System.out.println(" Busqueda Local BestFirst:");
         System.out.println(sol.imprimir());
         T.resetLlamadas();
         System.out.println("###########################");
