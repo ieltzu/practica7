@@ -3,7 +3,9 @@ package practica7;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.sql.Time;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.Iterator;
  
 public class Tsp
@@ -244,27 +246,202 @@ public class Tsp
  
     // Main method
     public static void main(String[] args){
-        Tsp T = new Tsp("dantzig42.tsp");
+    	Hashtable<String, String> params = Args.parse(args);
+        Tsp T = new Tsp(params.contains("-f")?params.get("-f"):"dantzig42.tsp");
         Camino.setTsp(T);
-        //T.printMatriz();
-        System.out.println("###########################");
-        BusquedaLocal bl = new BusquedaLocal(BusquedaLocal.criterios.Greedy,T);
-        T.resetLlamadas();
-        Camino sol = bl.ejecutar();
-        System.out.println(" Busqueda Local Greedy:");
-        System.out.println(sol.imprimir());
-        T.resetLlamadas();
-        System.out.println("###########################");
-        bl = new BusquedaLocal(BusquedaLocal.criterios.BestFirst,T);
-        T.resetLlamadas();
-        sol = bl.ejecutar();
-        System.out.println(" Busqueda Local BestFirst:");
-        System.out.println(sol.imprimir());
-        T.resetLlamadas();
-        System.out.println("###########################");
-        GeneticAlgorithm Ga = new GeneticAlgorithm(T, 50);
-        Camino sol2 = Ga.ejecutar();
-        System.out.println(" Genetic Algorithm:");
-        System.out.println(sol2.imprimir());
+        
+        boolean caleat = false, greedy = false, bestFirst = false, genetic = false;
+        
+        if (params.contains("-checkAleatorio")) caleat = true;
+        if (params.contains("-greedy")) greedy = true;
+        if (params.contains("-bestfirst")) bestFirst = true;
+        if (params.contains("-genetic")) genetic = true;
+        
+        int loops = 10;
+        if (params.contains("-l")){
+        	loops = Integer.parseInt(params.get("-l"));
+        }
+        
+        int pobMax = 50;
+        if (params.contains("-pobmax")){
+        	pobMax = Integer.parseInt(params.get("-pobmax"));
+        }
+        
+        if (!(caleat || greedy || bestFirst || genetic)){
+        	caleat = true;
+        	greedy = true;
+        	bestFirst = true;
+        	genetic = true;
+        }
+        
+        System.out.println("#########################################");
+        if (caleat){
+        	System.out.println("Comprobaremos si es mejor empezar con un aleatorio uniforme o sesgada:");
+        	long tI, tI2, m1=0, m2=0;
+        	double t1=0, t2=0;
+        	for (int i = 0; i < loops; i++) {
+        		T.resetLlamadas();
+				tI = System.currentTimeMillis();
+				try {
+					t1+=T.crearMuestraAleatoria(false).distancia();
+				} catch (Exception e) {}
+				m1 += (System.currentTimeMillis() - tI);
+				
+				tI2 = System.currentTimeMillis();
+				try {
+					t2+=T.crearMuestraAleatoria(true).distancia();
+				} catch (Exception e) {}
+				m2 += (System.currentTimeMillis() - tI2);
+			}
+        	m1 = m1 / loops;
+        	m2 = m2 / loops;
+        	t1 = t1 / loops;
+        	t2 = t2 / loops;
+        	
+        	System.out.println("\nAleatorio uniforme:");
+        	System.out.println("\tDistancia Media:\t"+t1);
+        	System.out.println("\tTiempo de ejecucion Medio:\t"+m1);
+        	System.out.println("\nAleatorio sesgado:");
+        	System.out.println("\tDistancia Media:\t"+t2);
+        	System.out.println("\tTiempo de ejecucion Medio:\t"+m2);
+        	
+        	System.out.println("\nPara la selección de tipo de aleatoriedad nos basaremos en la distancia.");
+        	if (t1>t2){
+        		System.out.println("\tElegimos aleatoriedad sesgada que tiene distancia más baja.");
+        		caleat = true;
+        	}else{
+        		System.out.println("\tElegimos aleatoriedad uniforme que tiene distancia más baja.");
+        		caleat = false;
+        	}
+        }else{
+        	System.out.println("Utilizaremos muestras con una aleatoriedad sesgada.");
+        	caleat=true;
+        }
+        
+        BusquedaLocal bl;
+        Camino sol,best;
+        
+        if (greedy){
+        	System.out.println("\n#########################################");
+        	System.out.println("Analizaremos como funciona el Greedy: ("+loops+" vueltas)");
+        	bl = new BusquedaLocal(BusquedaLocal.criterios.Greedy,T);
+            T.resetLlamadas();
+            long tI, tM=0;
+            double dm=0.0;
+            best = T.crearMuestraAleatoria(false);
+            try {
+				best.distancia();
+			} catch (Exception e) {
+			}
+            System.out.println("\nCada vuelta:");
+            for (int i = 0; i < loops; i++) {
+            	T.resetLlamadas();
+            	tI = System.currentTimeMillis();
+            	sol = bl.ejecutar();
+            	tM += (System.currentTimeMillis() - tI);
+            	try {
+					dm += sol.distancia();
+					if (best.distancia()>sol.distancia()){
+	            		best = sol;
+	            	}
+					System.out.println(i+1+"\t"+sol.imprimir());
+				} catch (Exception e) {
+				}
+			}
+            System.out.println("\n\tSe tarda una media de " + (tM / loops) + "ms para ejecutarse cada greedy.");
+            System.out.println("\tLa media de distancia: " + (dm / loops));
+            
+            System.out.println("\nLa mejor opcion salida:");
+            System.out.println("\t"+best.imprimir());
+        }
+        
+        if (bestFirst){
+        	System.out.println("\n#########################################");
+        	System.out.println("Analizaremos como funciona el BestFirst: ("+loops+" vueltas)");
+        	bl = new BusquedaLocal(BusquedaLocal.criterios.BestFirst,T);
+            T.resetLlamadas();
+            long tI, tM=0;
+            double dm=0.0;
+            best = T.crearMuestraAleatoria(false);
+            try {
+				best.distancia();
+			} catch (Exception e) {
+			}
+            System.out.println("\nCada vuelta:");
+            for (int i = 0; i < loops; i++) {
+            	T.resetLlamadas();
+            	tI = System.currentTimeMillis();
+            	sol = bl.ejecutar();
+            	tM += (System.currentTimeMillis() - tI);
+            	try {
+					dm += sol.distancia();
+					if (best.distancia()>sol.distancia()){
+	            		best = sol;
+	            	}
+					System.out.println(i+1+"\t"+sol.imprimir());
+				} catch (Exception e) {
+				}
+			}
+            System.out.println("\n\tSe tarda una media de " + (tM / loops) + "ms para ejecutarse cada greedy.");
+            System.out.println("\tLa media de distancia: " + (dm / loops));
+            
+            System.out.println("\nLa mejor opcion salida:");
+            System.out.println("\t"+best.imprimir());
+        }
+        
+        if (genetic){
+        	System.out.println("\n#########################################");
+        	System.out.println("Analizaremos como funciona el GeneticAlgorithm: ("+loops+" vueltas)");
+        	GeneticAlgorithm ga = new GeneticAlgorithm(T, pobMax);
+            T.resetLlamadas();
+            long tI, tM=0;
+            double dm=0.0;
+            best = T.crearMuestraAleatoria(false);
+            try {
+				best.distancia();
+			} catch (Exception e) {
+			}
+            System.out.println("\nCada vuelta:");
+            for (int i = 0; i < loops; i++) {
+            	T.resetLlamadas();
+            	tI = System.currentTimeMillis();
+            	sol = ga.ejecutar();
+            	tM += (System.currentTimeMillis() - tI);
+            	try {
+					dm += sol.distancia();
+					if (best.distancia()>sol.distancia()){
+	            		best = sol;
+	            	}
+					System.out.println(i+1+"\t"+sol.imprimir());
+				} catch (Exception e) {
+				}
+			}
+            System.out.println("\n\tSe tarda una media de " + (tM / loops) + "ms para ejecutarse cada greedy.");
+            System.out.println("\tLa media de distancia: " + (dm / loops));
+            
+            System.out.println("\nLa mejor opcion salida:");
+            System.out.println("\t"+best.imprimir());
+        }
+        System.out.println("#########################################");
+        
+//        System.out.println("###########################");
+//        BusquedaLocal bl = new BusquedaLocal(BusquedaLocal.criterios.Greedy,T);
+//        T.resetLlamadas();
+//        Camino sol = bl.ejecutar();
+//        System.out.println(" Busqueda Local Greedy:");
+//        System.out.println(sol.imprimir());
+//        T.resetLlamadas();
+//        System.out.println("###########################");
+//        bl = new BusquedaLocal(BusquedaLocal.criterios.BestFirst,T);
+//        T.resetLlamadas();
+//        sol = bl.ejecutar();
+//        System.out.println(" Busqueda Local BestFirst:");
+//        System.out.println(sol.imprimir());
+//        T.resetLlamadas();
+//        System.out.println("###########################");
+//        GeneticAlgorithm Ga = new GeneticAlgorithm(T, pobMax);
+//        Camino sol2 = Ga.ejecutar();
+//        System.out.println(" Genetic Algorithm:");
+//        System.out.println(sol2.imprimir());
     }
 } 

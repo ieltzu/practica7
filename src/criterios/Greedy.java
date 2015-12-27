@@ -14,8 +14,6 @@ public class Greedy  extends Criterios implements Criterio{
 	@Override
 	public Camino evaluar(){
 		Camino ganadora = this.tsp.crearMuestraAleatoria(true);
-		System.out.println("Inicial:");
-		System.out.println(ganadora.imprimir());
 		Camino tmp;
 		do{
 			tmp = ganadora;
