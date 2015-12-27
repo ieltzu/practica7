@@ -45,7 +45,7 @@ Para optimizar nuestras ciudades vamos a aplicar distintos criterios en el proce
 
 \section{Explicación y Pseudocódigo del algoritmo:}
 
-En el algoritmo de búsqueda local se recibe una solución la cual se pretende optimizar. La solución recibida se utilizará para calcular una combinatoria de todos los swaps posibles entre dos de las ciudades del camino. Una vez calculados estos nuevos caminos, se buscará el mejor camino de todos, o el primero mejor que encontremos(Greedy,BestFirst) comparándolos con nuestra solución de entrada. Si encontramos un camino mejor que el de nuestra entrada, el camino, pasará a ser la nueva entrada, y así, seguiremos hasta que ningún vecino supere a nuestra solución de entrada.
+En el algoritmo de búsqueda local se recibe una solución la cual se pretende optimizar. La solución recibida se utilizará para calcular una combinatoria de todos los swaps posibles entre dos de las ciudades del camino. Una vez calculados estos nuevos caminos, se buscará el mejor camino de todos, o el primero mejor que encontremos(Greedy,BestFirst) comparándolos con nuestra solución de entrada. Si encontramos un camino mejor que el de nuestra entrada, el camino, pasará a ser la nueva entrada, y así, seguiremos hasta que ningún vecino supere a nuestra solución de entrada.\\\\
 
 \begin{algorithm}[H] 
 \caption{Búsqueda Local} 
@@ -64,7 +64,7 @@ En el algoritmo de búsqueda local se recibe una solución la cual se pretende opt
 }
 \Return $ListaCiudades$
 \end{algorithm} 
-\\
+\\\\
 	En el algoritmo genético se recibe una población de soluciones para optimizar. 	Estas soluciones se ordenarán en base a su valor de salida(adaptación). Una vez obtenida la lista ordenada, se procederá a recoger la mitad de las muestras en sentido de valor de salida descendente. De estas muestras conseguidas, se harán cruces. Estos cruces crearán el mismo número de hijos que padres hemos cogido.\\
 
 	Para hacer los cruces hemos utilizado el algoritmo Order 1 CrossOver. En este algoritmo un segmento de uno de los padres pasará en orden al hijo. La información restante ocupará los trozos de información vacíos siempre que la información no este ya incluida en el primer segmento. He aquí el algoritmo.\\\\
@@ -190,7 +190,9 @@ La mejor opción de salida:\\
 [28,27,6,2,3,4,37,36,34,33,30,29,25,26,23,24,9,10,22,21,20,19,18,17,16,15,14,13,12,11,8,7,5,39,40,41,0,1,38,35,32,31]  -  841.0\\\\
 #########################################\\\\
 
-Aquí escribimos conclusiones\\
+Como vemos en los resultados obtenidos, los resultados son bastante similares en los tres algoritmos. En todos ellos utilizamos un algoritmo, de creación de vecinos o de una sola solución, que nos devuelve una solución ligeramente mejor que una aleatoria. Utilizamos este tipo de algoritmo ya que teniendo una solución mejor desde un principio conseguimos unos resultados un poco mejor que utilizando soluciones totalmente aleatorias.\\
+
+En el algoritmo genético hemos ido utilizando distintos valores para el parámetro que mide el número de vecinos que utilizamos durante todo el algoritmo. Después de varios intentos hemos decidido poner 2500 de número de población ya que ofrece buenos resultados en un tiempo de ejecución razonable. De todos modos, si se quiere, se puede incluir en la ejecución el numero de vecindario que se quiere. 
 
 \section{Conclusiones:}
 Implementar los algoritmos nos ha llevado a sacar varias conclusiones. El algoritmo de búsqueda local usando Greedy o BestFirst como criterio es mucho más fácil de implementar que el algoritmo genético. Planificar los cruces ha sido la parte mas costosa del problema en los algoritmos genéticos. Una vez que se sabe como funciona bien el algoritmo es sencillo implementarlo.\\ 

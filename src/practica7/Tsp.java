@@ -258,7 +258,7 @@ public class Tsp
         	loops = Integer.parseInt(params.get("-l"));
         }
         
-        int pobMax = 50;
+        int pobMax = 2500;
         if (params.containsKey("-pobmax")){
         	pobMax = Integer.parseInt(params.get("-pobmax"));
         }
