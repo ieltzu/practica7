@@ -243,23 +243,23 @@ public class Tsp
     // Main method
     public static void main(String[] args) throws Exception{
     	Hashtable<String, String> params = Args.parse(args);
-        Tsp T = new Tsp(params.contains("-f")?params.get("-f"):"dantzig42.tsp");
+        Tsp T = new Tsp(params.containsKey("-f")?params.get("-f"):"dantzig42.tsp");
         Camino.setTsp(T);
         
         boolean caleat = false, greedy = false, bestFirst = false, genetic = false;
         
-        if (params.contains("-checkAleatorio")) caleat = true;
-        if (params.contains("-greedy")) greedy = true;
-        if (params.contains("-bestfirst")) bestFirst = true;
-        if (params.contains("-genetic")) genetic = true;
+        if (params.containsKey("-checkAleatorio")) caleat = true;
+        if (params.containsKey("-greedy")) greedy = true;
+        if (params.containsKey("-bestfirst")) bestFirst = true;
+        if (params.containsKey("-genetic")) genetic = true;
         
         int loops = 10;
-        if (params.contains("-l")){
+        if (params.containsKey("-l")){
         	loops = Integer.parseInt(params.get("-l"));
         }
         
         int pobMax = 50;
-        if (params.contains("-pobmax")){
+        if (params.containsKey("-pobmax")){
         	pobMax = Integer.parseInt(params.get("-pobmax"));
         }
         
@@ -378,7 +378,7 @@ public class Tsp
 				} catch (Exception e) {
 				}
 			}
-            System.out.println("\n\tSe tarda una media de " + (tM / loops) + "ms para ejecutarse cada greedy.");
+            System.out.println("\n\tSe tarda una media de " + (tM / loops) + "ms para ejecutarse cada Bestfirst.");
             System.out.println("\tLa media de distancia: " + (dm / loops));
             
             System.out.println("\nLa mejor opcion salida:");
@@ -412,32 +412,12 @@ public class Tsp
 				} catch (Exception e) {
 				}
 			}
-            System.out.println("\n\tSe tarda una media de " + (tM / loops) + "ms para ejecutarse cada greedy.");
+            System.out.println("\n\tSe tarda una media de " + (tM / loops) + "ms para ejecutarse cada GeneticAlgorithm.");
             System.out.println("\tLa media de distancia: " + (dm / loops));
             
             System.out.println("\nLa mejor opcion salida:");
             System.out.println("\t"+best.imprimir());
         }
         System.out.println("#########################################");
-        
-//        System.out.println("###########################");
-//        BusquedaLocal bl = new BusquedaLocal(BusquedaLocal.criterios.Greedy,T);
-//        T.resetLlamadas();
-//        Camino sol = bl.ejecutar();
-//        System.out.println(" Busqueda Local Greedy:");
-//        System.out.println(sol.imprimir());
-//        T.resetLlamadas();
-//        System.out.println("###########################");
-//        bl = new BusquedaLocal(BusquedaLocal.criterios.BestFirst,T);
-//        T.resetLlamadas();
-//        sol = bl.ejecutar();
-//        System.out.println(" Busqueda Local BestFirst:");
-//        System.out.println(sol.imprimir());
-//        T.resetLlamadas();
-//        System.out.println("###########################");
-//        GeneticAlgorithm Ga = new GeneticAlgorithm(T, pobMax);
-//        Camino sol2 = Ga.ejecutar();
-//        System.out.println(" Genetic Algorithm:");
-//        System.out.println(sol2.imprimir());
     }
 } 
