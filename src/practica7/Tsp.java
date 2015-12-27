@@ -17,9 +17,8 @@ public class Tsp
     private int maximollamadas = 1000000;
     // number of cities
  
-    public Tsp(String fichero)
+    public Tsp(String fichero) throws Exception
     {
-        try {
 			BufferedReader in = new BufferedReader(new FileReader(fichero));
 			boolean empezar = false;
 			int y=0,x=0;
@@ -53,9 +52,6 @@ public class Tsp
 					empezar=true;
 				}
 			}
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
         
     }
     
@@ -245,7 +241,7 @@ public class Tsp
     }
  
     // Main method
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception{
     	Hashtable<String, String> params = Args.parse(args);
         Tsp T = new Tsp(params.contains("-f")?params.get("-f"):"dantzig42.tsp");
         Camino.setTsp(T);
