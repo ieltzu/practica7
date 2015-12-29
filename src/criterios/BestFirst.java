@@ -12,8 +12,8 @@ public class BestFirst extends Criterios implements Criterio{
 	}
 	
 	@Override
-	public Camino evaluar() {
-		Camino ganadora = tsp.crearMuestraAleatoria(true);
+	public Camino evaluar(boolean tipo) {
+		Camino ganadora = tsp.crearMuestraAleatoria(tipo);
 		Camino tmp;
 		do{
 			tmp = ganadora;

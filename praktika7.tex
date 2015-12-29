@@ -2,16 +2,14 @@
 \usepackage[margin=0.5in]{geometry}
 \usepackage{amsthm}
 \usepackage[latin1]{inputenc}
-%\usepackage[utf8]{inputenc}
-%\usepackage{mathtools}
 \usepackage{amsfonts}
 \usepackage{float}
-%\usepackage{amssymb}
 \usepackage{fancyvrb}
 \usepackage{indentfirst}
 \usepackage{array}
 \usepackage{graphicx}
 \usepackage[round]{natbib}
+\usepackage{verbatimbox}
 \usepackage{array}
 \theoremstyle{plain}
 \usepackage{color}
@@ -34,10 +32,10 @@
 
 \section{Introducción:}
 \subsection{Exposición de la práctica:}
-En la práctica presentada se nos pide implementar los algoritmos de optimización denominados búsqueda local(para una sola solución) y algoritmos genéticos(varias soluciones) para el conjunto de datos dantzig42. Para ello hemos desarrollado nuestro código en el lenguaje de programación Java y después hemos creado nuestro ejecutador .jar. Además hemos desarrollado este documento para plasmar las partes más importantes de la práctica.
+En la práctica presentada se nos pide implementar los algoritmos de optimización denominados búsqueda local(para una sola solución) y algoritmos genéticos (varias soluciones) para el conjunto de datos dantzig42. Para ello hemos desarrollado nuestro código en el lenguaje de programación Java y después hemos creado nuestro ejecutador .jar. Además hemos desarrollado este documento para plasmar las partes más importantes de la práctica.
 
 \subsection{Objetivos:}
-Los objetivos son claros; conseguir un algoritmo eficiente y efectivo para optimizar una solción o un conjuntos de soluciones de un conjunto de datos. El problema planteado tiene nombre propio TSP. El código que hemos desarrollado no es dependiente a un solo conjunto de datos,ya que es posible utilizarlo en más de un conjunto de datos(menos la lectura).
+Los objetivos son claros; conseguir un algoritmo eficiente y efectivo para optimizar una solución o un conjuntos de soluciones de un conjunto de datos. El problema planteado tiene nombre propio TSP. El código que hemos desarrollado no es dependiente a un solo conjunto de datos, ya que es posible utilizarlo en más de un conjunto de datos (menos la lectura).
 
 Como hemos recibido el archivo dantzig42 para desarrollar la práctica, vamos a analizar el archivo para ver su contenido. En el archivo de datos podemos encontrar un conjunto de valores numéricos separados por ceros. Estos ceros indican un salto de linea. Si procesamos estos datos, conseguimos la mitad una matriz de una dimensión de 49x49. Como tenemos 49 ciudades, el punto en común de los pares de ciudades nos indica cual es el peso de una ciudad a otra.
 
@@ -45,48 +43,49 @@ Para optimizar nuestras ciudades vamos a aplicar distintos criterios en el proce
 
 \section{Explicación y Pseudocódigo del algoritmo:}
 
-En el algoritmo de búsqueda local se recibe una solución la cual se pretende optimizar. La solución recibida se utilizará para calcular una combinatoria de todos los swaps posibles entre dos de las ciudades del camino. Una vez calculados estos nuevos caminos, se buscará el mejor camino de todos, o el primero mejor que encontremos(Greedy,BestFirst) comparándolos con nuestra solución de entrada. Si encontramos un camino mejor que el de nuestra entrada, el camino, pasará a ser la nueva entrada, y así, seguiremos hasta que ningún vecino supere a nuestra solución de entrada.\\\\
+\subsection{Búsqueda Local:}
+
+En el los algoritmos de búsqueda local, tanto en Greedy o BestFirst, se recibe la matriz de distancias con la cual aleatoriamente crea un camino el cual se intuye que no es el optimo y se procede a optimizar. En ambos dos, se crea una combinatoria de los parámetros de la solución aleatoria sacada (en nuestro caso utilizamos swap). Luego escogeremos la primera que optimize un poco el resultado aleatorio o la mejor de todas las combinatorias sacadas, dependiendo si estamos con el BestFirst o Greedy. Repetimos este proceso hasta que no se mejore en una iteración o nos quedemos sin tiempo o llamadas a la función de costo. Con estos métodos no se asegura la solución optima, pero son muy rápidos, aunque dependiendo de la primera solución aleatoria cambia mucho el resultado final.
 
 \begin{algorithm}[H] 
 \caption{Búsqueda Local} 
-\SetKwInOut{Input}{entrada} 
-\SetKwInOut{Output}{salida}
-\Input{Listaciudades} 
-\Output{ListaCiudadesOptima} 
-\While{$Valor(ListaCiudades) >= Valor(ListaCiudadesOptima)$ \& $! TiempoComputacionalAcabado$ \& $! Numero de iteraciones máximo$}{
+\SetKwInOut{Input}{Entrada} 
+\SetKwInOut{Output}{Salida}
+\Input{TSP} 
+\Output{Recorrido}
+$Recorrido = sacarRecorridoAleatorio();$\\
+\While{$Valor(Recorrido) < Valor(RecorridoAnt)$ \& $! TiempoComputacionalAcabado$ \& $!Numero de iteraciones maximo$}{
+	$RecorridoAnt = Recorrido$
 	 $Combinatoria = CrearCombinatoriaDeSwaps()$\\
-	 $ListaCiudadesOptima = BusquedaMejorLista(Combinatoria)$\\
-	 \eIf{$ListaCiudadesOptima <= ListaCiudades$}{
-	 	\Return $ListaCiudades$
-	 }{
-	 	$ListaCiudades=ListaCiudadesOptima$\\
-	 }
+	 $Recorrido = BusquedaMejorRecorrido(Combinatoria)$\\
 }
-\Return $ListaCiudades$
+\Return $Recorrido$
 \end{algorithm} 
-\\\\
-	En el algoritmo genético se recibe una población de soluciones para optimizar. 	Estas soluciones se ordenarán en base a su valor de salida(adaptación). Una vez obtenida la lista ordenada, se procederá a recoger la mitad de las muestras en sentido de valor de salida descendente. De estas muestras conseguidas, se harán cruces. Estos cruces crearán el mismo número de hijos que padres hemos cogido.\\
 
-	Para hacer los cruces hemos utilizado el algoritmo Order 1 CrossOver. En este algoritmo un segmento de uno de los padres pasará en orden al hijo. La información restante ocupará los trozos de información vacíos siempre que la información no este ya incluida en el primer segmento. He aquí el algoritmo.\\\\
+\subsection{Algoritmo Genetico:}
+	
+	En el algoritmo genético también se genera una solución a partir de un modelo TSP. Pero en este caso, lo primero es generar una población aleatoria de soluciones, es decir, crear varias soluciones que luego se cruzarán y mutarán para ir mejorando la solución hasta que no podamos llamar más veces a la función de costo o el tiempo de ejecución de acabe.
+	
+	Para hacer los cruces hemos utilizado un algoritmo llamado CrossOver. Este algoritmo recibe dos padres puede crear una o varias soluciones. En nuestro caso hemos creado 2. Primero se coge un segmento de uno de los padres y se copia tal cual al hijo, luego se va rellenando los huecos restantes con los datos del segundo padres empezando desde la posición del ultimo número metido, sin repetir los números.
 
 \begin{algorithm}[H] 
 \caption{Order 1 CrossOver} 
-\SetKwInOut{Input}{entrada} 
-\SetKwInOut{Output}{salida}
-\Input{ListaCiudades1(P1),ListaCiudades2(P2)} 
-\Output{ListaCiudadesHijo1,ListaCiudadesHijo2} 
-\While{$Numerohijos<2$}{
-	 Elegir segmento de azar y copiarlo de P1 en hijo\\
-	\For{$Para cada elemento fuera del segmento, empezando desde el final del segmento$}{ 
-		\If {$el elemento seleccionado de P2 no está en el segmento seleccionado de P1$}{
-			colocarlo en orden después del segmento en P3(si lista está llena se empezará desde el principio hasta el principio del segmento)\\
-		}\\
+\SetKwInOut{Input}{Entrada} 
+\SetKwInOut{Output}{Salida}
+\Input{$Camino1, Camino2$} 
+\Output{$CaminoHijo$} 
+
+ Elegir segmento de azar y copiarlo de $Camino1$ en $CaminoHijo$\\
+\For{Para cada elemento fuera del segmento, empezando desde el final del segmento}{ 
+	\If {el elemento seleccionado de $Camino2$ no esta en el segmento seleccionado de $Camino1$}{
+	colocarlo en orden después del segmento en $CaminoHijo$ (si lista está llena se empezará desde el principio hasta el principio del segmento\\
+		}
 	}
-}
-\Return $ListaCiudadeshijo1,ListaCiudadesHijo2$
+
+\Return $CaminoHijo$
 \end{algorithm} 
 	 
-	 Los hijos sufrirán mutaciones en el 30 por ciento de los casos(criterio establecido por nosotros) y se hará un nuevo conjunto de datos entre los padres y los hijos mutados y no mutados. De esta forma se obtendrá una población del mismo número de la que teníamos de entrada.\\
+	 Los hijos sufrirán mutaciones en el 30 \% de los casos (criterio establecido por nosotros) y se hará un nuevo conjunto de datos entre los padres y los hijos mutados y no mutados. De esta forma se obtendrá una población del mismo número de la que teníamos de entrada.\\
 
 El algoritmo puede converger en estos tres casos:
 \begin{itemize}
@@ -100,120 +99,219 @@ El algoritmo puede converger en estos tres casos:
 \caption{Algoritmo Genético} 
 \SetKwInOut{Input}{entrada} 
 \SetKwInOut{Output}{salida}
-\Input{PoblacionListaCiudades} 
-\Output{PoblacionListaCiudadesMejoradas} 
-\While{$! TiempoComputacionalAcabado$ \& $! Numero de iteraciones máximo$}{
+\Input{TSP} 
+\Output{Camino} 
+\While{$! TiempoComputacionalAcabado$ \& $! NumeroDeIteracionesMaximo$}{
 	 $PoblacionOrdenada = OrdenarPoblacionListaCiudades()$\\
 	 $Cruces = CrearCruces(PoblacionOrdenada/2)$\\
-	 $mutaciones = CrearMutaciones(Cruces)$ 	\\	 $PoblaciónListaCiudadesMejoradas=ReemplazarMutacionesPorMuestrasDeBajoNivel(PoblacionOrdenada,Mutaciones)$\\
+	 $mutaciones = CrearMutaciones(Cruces)$ 	\\	 $PoblacionListaCiudadesMejoradas=ReemplazarMutacionesPorMuestrasDeBajoNivel(PoblacionOrdenada,Mutaciones)$\\
 }
-\Return &$PoblaciónListaCiudadesMejoradas$
+\Return $PoblacionListaCiudadesMejoradas$
 \end{algorithm} 
 
 \section{Experimentación y Resultados:}
-Hemos ejecutado el programa y nos han salido estos resultados:\\\\
+
+Una vez que tenemos el archivo 'practica7.jar', lo único que hay que hacer es dejar al lado el fichero del TSP 'dantzig42'. Para ejecutarlo solo hace falta ejecutar la siguiente linea:
+
+\begin{verbnobox}
+            > java -jar practica7.jar
+\end{verbnobox}
+
+Aunque si queremos se puede ejecutar cada método independientemente, cambiar el número de vueltas (por defecto $10$),cambiar la población del GeneticAlgorithm o especificar si queremos muestras aleatorias uniformes o sesgadas. Para ello hay que introducir los siguientes comandos:
+
+\begin{verbnobox}
+            -checkAleatorio : si se quiere comprobar los resultados del aleatorio normal y sesgado.
+            -greedy : si se quiere comprobar el algoritmo Greedy.
+            -bestfirst : si se quiere comprobar el algoritmo Best First.
+            -genetic : si se quiere comprobarf el algoritmo Genetico.
+            
+            -l num  : para cambiar el número de vueltas (ej: -l 20)
+            -pobmax num : para cambiar la poblacion del algoritmo Genetic (ej: -pobmax 1000)
+            -aleatorioNormal : para que se ejecute con el aleatorio normal.
+            -aleatorioSesgado : para que se ejecute con el aleatorio sesgado.
+\end{verbnobox}
+
+Y un ejemplo sería:
+
+\begin{verbnobox}
+            > java -jar practica7.jar -greedy -bestfirst -l 50 -aleatorioNormal
+            > java -jar practica7.jar -genetic -l 20 -aleatorioSesgada -pobmax 300
+\end{verbnobox}
+
+
+Hemos ejecutado el programa de la manera simple y nos han salido estos resultados:
+
+\begin{verbnobox}[\tiny\small]
+#########################################
+Comprobaremos si es mejor empezar con un aleatorio uniforme o sesgada:
+
+Aleatorio uniforme:
+         Distancia Media:	3139.0
+         Tiempo de ejecucion Medio:	0
+
+Aleatorio sesgado:
+         Distancia Media:	2418.0
+         Tiempo de ejecucion Medio:	26
+
+Para la selección de tipo de aleatoriedad nos basaremos en la distancia.
+         Elegimos aleatoriedad sesgada que tiene distancia más baja.
 
 #########################################
-Comprobaremos si es mejor empezar con un aleatorio uniforme o sesgada:\\\\
+Analizaremos como funciona el Greedy: (10 vueltas)
 
-Aleatorio uniforme:\\
-Distancia Media:	3112.9\\
-Tiempo de ejecución Medio:	0\\\\
+         Se tarda una media de 35ms para ejecutarse cada greedy.
+         La media de distancia: 1039.0
 
-Aleatorio sesgado:\\
-Distancia Media:	2450.0\\
-Tiempo de ejecución Medio:	31\\\\
+La mejor opcion salida:
+	[21,20,28,32,29,27,11,12,13,14,15,17,18,19,16,23,24,26,25,30,31,33,34,35,36,37,38,39,40,41,0,1,4,5,6,3,2,7,8,9,10,22]
+         ->  864.0
 
-Para la selección de tipo de aleatoriedad nos basaremos en la distancia.\\
-Elegimos aleatoriedad sesgada que tiene distancia más baja.\\\\
+#########################################
+Analizaremos como funciona el BestFirst: (10 vueltas)
 
-#########################################\\
-Analizaremos como funciona el Greedy: (10 vueltas)\\\\
+         Se tarda una media de 37ms para ejecutarse cada Bestfirst.
+         La media de distancia: 980.6
 
-Cada vuelta:\\
-1 [20,27,3,40,41,0,1,2,7,8,25,26,6,5,34,33,32,31,29,30,4,39,38,37,36,35,28,21,12,13,14,15,22,23,24,9,11,10,16,17,18,19]  -  998.0\\\\
-2 [35,32,31,9,10,11,12,17,18,19,20,27,28,29,25,26,23,24,6,5,3,4,38,39,40,41,0,1,2,13,14,15,16,22,21,8,7,30,33,34,37,36]  -  1005.0\\\\
-3 [10,11,9,5,4,38,39,3,6,26,25,24,8,7,2,40,41,0,1,23,15,14,13,12,22,21,27,29,30,34,37,36,35,33,31,32,28,20,19,18,17,16]  -  1005.0\\\\
-4 [5,4,38,37,36,35,34,33,23,10,9,8,7,24,26,25,39,40,0,1,41,29,30,6,3,2,11,12,16,20,21,22,15,13,14,17,18,19,27,28,32,31]  -  1020.0\\\\
-5 [22,24,31,32,5,6,2,3,4,33,34,35,36,37,38,39,1,0,41,40,11,15,17,14,13,12,10,23,26,25,27,28,29,30,7,8,9,16,18,19,20,21]  -  1018.0\\\\
-6 [40,41,0,1,39,34,29,30,33,35,36,37,38,4,5,6,21,22,15,14,13,12,16,20,27,28,32,31,7,8,9,24,25,26,23,10,11,17,18,19,2,3]  -  1018.0\\\\
-7 [23,24,9,4,38,39,22,21,19,20,27,28,29,31,32,33,30,5,6,7,8,2,1,0,41,40,3,26,18,17,14,13,15,16,12,11,10,34,35,36,37,25]  -  1115.0\\\\
-8 [8,9,10,11,12,13,14,15,2,1,0,41,40,39,33,30,29,31,32,28,27,21,22,23,25,26,20,19,18,17,16,24,3,4,38,37,36,35,34,5,6,7]  -  986.0\\\\
-9 [35,36,1,0,41,40,33,34,37,38,39,3,2,8,9,11,10,23,29,31,30,25,26,20,19,18,17,14,13,12,7,4,5,6,24,22,15,16,21,27,28,32]  -  1046.0\\\\
-10 [13,12,9,8,7,3,40,41,0,1,2,24,23,21,22,11,10,25,30,33,34,5,6,4,39,38,37,36,35,32,19,20,27,28,31,29,26,16,18,17,15,14]  -  1027.0\\\\
+La mejor opcion salida:
+	[14,13,12,11,9,1,0,41,40,39,38,37,36,35,34,4,3,2,7,8,6,5,33,32,31,30,29,28,27,26,25,24,23,10,22,21,20,19,18,17,16,15]
+	         ->  777.0
 
-Se tarda una media de 52ms para ejecutarse cada greedy.\\
-La media de distancia: 1023.8\\\\
+#########################################
+Analizaremos como funciona el GeneticAlgorithm: (10 vueltas)
+         La población será de: 2500
 
-La mejor opción salida:\\
-[8,9,10,11,12,13,14,15,2,1,0,41,40,39,33,30,29,31,32,28,27,21,22,23,25,26,20,19,18,17,16,24,3,4,38,37,36,35,34,5,6,7]  -  986.0\\\\
+         Se tarda una media de 21733ms para ejecutarse cada GeneticAlgorithm.
+         La media de distancia: 786.3
 
-#########################################\\
-Analizaremos como funciona el BestFirst: (10 vueltas)\\
+La mejor opcion salida:
+	[40,39,38,37,36,35,34,33,32,31,30,29,28,27,26,25,24,23,22,21,20,19,18,17,16,15,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0,41]
+         ->  699.0
+#########################################
+\end{verbnobox}
 
-Cada vuelta:\\\\
-1 [14,15,16,22,21,27,28,26,25,29,30,5,6,7,8,9,23,24,2,3,39,38,1,41,40,0,17,18,19,20,32,31,33,34,35,36,37,4,10,11,12,13]  -  1004.0\\\\
-2 [25,24,1,0,41,40,3,23,22,15,17,14,13,12,21,28,32,31,29,30,35,36,37,38,39,4,34,33,5,6,2,7,8,9,11,10,16,18,19,20,27,26]  -  998.0\\\\
-3 [35,39,40,41,0,1,4,6,5,33,30,27,20,21,22,10,11,9,8,7,2,3,38,37,36,34,31,28,16,12,13,14,15,17,18,19,25,26,23,24,29,32]  -  943.0\\\\
-4 [24,9,10,11,12,13,14,17,15,16,32,35,36,37,4,38,39,40,41,1,0,3,2,34,33,31,28,27,21,22,23,29,30,8,7,6,5,25,26,20,18,19]  -  1030.0\\\\
-5 [17,16,4,39,38,35,32,31,34,36,37,1,41,40,0,15,14,13,12,11,10,8,7,2,3,6,5,33,30,29,24,9,23,22,21,26,25,27,28,20,19,18]  -  1074.0\\\\
-6 [12,13,14,15,17,18,19,32,35,36,37,38,39,40,41,0,1,2,8,9,11,10,24,7,6,5,34,33,31,30,29,28,27,25,26,23,22,21,16,20,4,3]  -  993.0\\\\
-7 [19,20,30,4,38,37,36,35,34,33,5,6,7,8,2,3,39,40,41,0,1,9,11,10,22,21,23,24,29,31,32,28,27,25,26,16,12,13,14,15,17,18]  -  903.0\\\\
-8 [15,17,14,13,12,9,8,7,6,5,37,36,35,34,33,31,2,3,40,41,0,1,39,38,4,24,26,25,29,30,23,10,11,22,21,20,18,19,32,28,27,16]  -  1012.0\\\\
-9 [7,2,1,0,41,40,39,38,37,4,3,22,21,20,16,10,11,9,8,36,35,34,25,26,19,18,17,15,14,13,12,6,5,33,30,29,31,32,28,27,23,24]  -  1029.0\\\\
-10 [15,17,14,13,10,23,6,5,4,3,40,41,0,1,2,22,21,16,18,19,20,28,29,31,32,35,36,37,39,38,34,33,30,27,26,25,24,7,8,9,11,12]  -  983.0\\\\
 
-Se tarda una media de 49ms para ejecutarse cada BestFirst.\\
-La media de distancia: 996.9\\\\
+Como vemos en los resultados obtenidos, los resultados son bastante similares en los tres algoritmos. En todos ellos utilizamos un algoritmo, de creación de vecinos o de una sola solución, que nos devuelve una solución ligeramente mejor que una aleatoria. Utilizamos este tipo de algoritmo ya que teniendo una solución mejor desde un principio conseguimos unos resultados un poco mejor que utilizando soluciones totalmente aleatorias, aunque tarde bastante más en sacarlo.
 
-La mejor opción salida:\\
-[19,20,30,4,38,37,36,35,34,33,5,6,7,8,2,3,39,40,41,0,1,9,11,10,22,21,23,24,29,31,32,28,27,25,26,16,12,13,14,15,17,18]  -  903.0\\\\
-#########################################\\
-Analizaremos como funciona el GeneticAlgorithm: (10 vueltas)\\
+En el algoritmo genético hemos ido utilizando distintos valores para el parámetro que mide el número de vecinos que utilizamos durante todo el algoritmo. Después de varios intentos hemos decidido poner 2500 de número de población ya que ofrece buenos resultados en un tiempo de ejecución razonable. De todos modos, si se quiere, se puede incluir en la ejecución el numero de vecindario que se quiere.
 
-Cada vuelta:\\\\
-1 [3,2,7,8,6,5,30,31,29,28,27,25,26,23,24,9,11,10,22,21,20,16,12,13,14,15,17,18,19,1,0,41,40,39,38,37,34,33,32,35,36,4]  -  856.0\\\\
-2 [30,29,25,27,28,32,31,33,34,35,36,37,38,4,5,6,7,8,24,26,21,22,23,2,3,9,11,12,13,14,15,17,18,19,20,16,10,1,0,41,40,39]  -  972.0\\\\
-3 [19,18,17,14,13,15,16,12,11,9,10,22,21,23,26,5,33,31,32,28,27,25,24,8,7,6,2,3,4,38,39,40,41,0,1,37,36,35,34,30,29,20]  -  844.0\\\\
-4 [4,3,2,6,5,30,22,21,20,27,26,25,24,23,10,11,9,8,7,1,0,41,40,39,12,16,15,13,14,17,18,19,28,29,31,32,33,34,35,36,37,38]  -  925.0\\\\
-5 [7,8,9,11,10,23,24,25,26,22,21,20,27,28,29,30,31,32,33,34,35,40,41,0,1,2,12,13,14,15,17,18,19,16,3,4,39,38,37,36,5,6]  -  948.0\\\\
-6 [30,33,34,36,35,32,31,28,27,23,24,9,8,7,3,4,37,38,39,40,41,0,1,2,6,5,19,18,17,16,21,22,10,11,12,13,14,15,20,26,25,29]  -  897.0\\\\
-7 [26,25,8,7,30,31,32,33,6,5,34,35,36,37,38,39,4,3,2,1,0,40,41,29,28,19,18,14,13,12,15,17,16,22,23,24,9,11,10,21,20,27]  -  939.0\\\\
-8 [36,37,4,3,2,7,8,6,5,30,29,28,27,21,16,18,19,20,26,25,24,9,10,11,12,13,14,17,15,22,23,1,0,41,40,39,38,35,32,31,33,34]  -  903.0\\\\
-9 [28,27,6,2,3,4,37,36,34,33,30,29,25,26,23,24,9,10,22,21,20,19,18,17,16,15,14,13,12,11,8,7,5,39,40,41,0,1,38,35,32,31]  -  841.0\\\\
-10 [23,30,31,32,33,34,35,36,37,38,39,4,6,7,8,9,24,25,26,27,28,29,5,2,1,0,41,40,3,21,20,19,18,10,11,12,13,14,17,15,16,22]  -  937.0\\\\
-
-Se tarda una media de 1614ms para ejecutarse cada geneticAlgorithm.\\
-La media de distancia: 906.2\\\\
-
-La mejor opción de salida:\\
-[28,27,6,2,3,4,37,36,34,33,30,29,25,26,23,24,9,10,22,21,20,19,18,17,16,15,14,13,12,11,8,7,5,39,40,41,0,1,38,35,32,31]  -  841.0\\\\
-#########################################\\\\
-
-Como vemos en los resultados obtenidos, los resultados son bastante similares en los tres algoritmos. En todos ellos utilizamos un algoritmo, de creación de vecinos o de una sola solución, que nos devuelve una solución ligeramente mejor que una aleatoria. Utilizamos este tipo de algoritmo ya que teniendo una solución mejor desde un principio conseguimos unos resultados un poco mejor que utilizando soluciones totalmente aleatorias.\\
-
-En el algoritmo genético hemos ido utilizando distintos valores para el parámetro que mide el número de vecinos que utilizamos durante todo el algoritmo. Después de varios intentos hemos decidido poner 2500 de número de población ya que ofrece buenos resultados en un tiempo de ejecución razonable. De todos modos, si se quiere, se puede incluir en la ejecución el numero de vecindario que se quiere. 
+Como en el algoritmo genético se empieza con una población aleatoria, el proceso de crearla mediante nuestro método puede tardar un poco ya que para crear una único camino se necesitan 26ms. Con lo que ejecutarlo 2500 veces llevará al rededor de un minuto cada vez. Mas lo que tarde en ejecutarse el propio algoritmo, que no es mucho. Pero cabe destacar que la diferencia es notable. Los resultados bajan 100 unidades aproximadamente en el caso del algoritmo genetico.
 
 \section{Conclusiones:}
-Implementar los algoritmos nos ha llevado a sacar varias conclusiones. El algoritmo de búsqueda local usando Greedy o BestFirst como criterio es mucho más fácil de implementar que el algoritmo genético. Planificar los cruces ha sido la parte mas costosa del problema en los algoritmos genéticos. Una vez que se sabe como funciona bien el algoritmo es sencillo implementarlo.\\ 
-El algoritmo genético ofrece mejores resultados que el de búsqueda local. Según el numero de población va aumentando los resultados de los algoritmos genéticos aumenta, al igual que su costo computacional. 
-La búsqueda local ofrece un resultado bueno sin mucho costo computacional. Si les diéramos el mismo tiempo de ejecución a los dos algoritmos sin duda el algoritmo de búsqueda local daría mejores resultados.
-Respondiendo a la pregunta de que algoritmo funciona mejor con la solución base, la respuesta es el algoritmo genético aunque no ofrece unos resultados tan diferentes como esperábamos.\\
-En nuestra opinión no es un algoritmo que sea mejor, simplemente que con un mayor número de iteraciones y mayor tiempo computacional ofrece mejores resultados que la búsqueda local, ya que, este algoritmo no mejora tanto aunque el tiempo computacional aumente considerablemente.\\  
+
+Tras estar probando con los algoritmos y jugar con sus parámentros en el caso del algoritmo genético, hemos sacado las siguientes conclusiones.
+
+\subsection{Greedy:}
+
+En el caso del greedy como ya intuíamos, en cada iteración se hacen el mismo número de llamadas a la función de costo y en las primeras iteraciones este costo disminuía mucho más que al final, lo que es normal ya que el margen de mejora es menor.
+
+Se puede decir que este algoritmo siempre converge en una solución parecida aunque las iteraciones necesitadas y por lo que lleva su tiempo de ejecución sea muy distinto. A la vez de que no por tener más iteraciones sabemos que va a terner una solución mejor, como podemos ver en el gráfico de abajo, la serie 3, ha sido una de las que mas ha tardado y de las que peor resultado ha obtenido.
+
+En este caso el algoritmo converge más rápido que el BestFirst.
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{Greedy.png}
+\centering
+\end{figure}
+
+\subsection{Best First:}
+
+Como podemos ver en este gráfico de tiempos, este algoritmo es muy rápido, pero su duración es muy diferente cuando cambiamos el camino aleatorio de inicio. Y aunque no lo hayamos probado, con la implementación podemos saber que también puede influir el tipo de combinación que se utilice.
+
+\begin{figure}[H]
+\includegraphics[width=0.7\textwidth]{BestFirst(tiempo).png}
+\centering
+\end{figure}
+
+Para analizar este algoritmo hemos tenido que separar en dos gráficos como disminuye el valor de costo y como aumenta las llamadas a la función de costo en cada iteración.
+
+En cuanto al valor de costo, con el Best First, nos hemos dado cuenta que baja de manera uniforme en cada iteración y que al igual que el greedy, converge en soluciones parecidas aunque las iteraciones necesitadas sean diferentes.
+	
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{BestFirst(Valor).png}
+\centering
+\end{figure}	
+
+Si nos fijamos en las llamadas que ha utilizado en cada iteración y cada serie, podemos ver que no sigue una tendencia clara aunque parezca que en las primeras iteraciones casi no necesite ninguna llamada para mejorar. Pero esto es irregular porque busca el primer camino que sea algo mejor que el padre, y esto puede suceder en cualquiera de las opciones, aunque es verdad que en las primeras iteraciones hay mas opciones de mejora, con lo que la probabilidad de que la mejora esté entre las primeras es mayor. Y que en las últimas iteraciones hace más llamadas ya que hay pocas mejoras.
+
+Por lo que se puede decir que tiene una tendencia exponencial.
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{BestFirst(Llamadas).png}
+\centering
+\end{figure}	
+
+Y mirando los dos gráficos a la vez, concluimos que al igual que en el Greedy, el número de iteraciones que se hayan echo no implica que el resultado sea mejor, además de que en este caso tampoco sabemos si se han necesitado más o menos iteraciones ya que es bastante irregular.
+
+\subsection{Algoritmo Genético:}
+
+Se puede decir que este algoritmo es mas sofisticado que los anteriores y que saca resultados mejores y más estables. también es verdad que es necesario ajustar tanto los parámetros de población como de llamadas necesarias.
+
+Como podemos ver en el gráfico de abajo, en las ultimas iteraciones apenas hay mejora, con lo que se podría reducir el número de llamadas y no habría mucho cambio, siempre que le demos margen para que llegue a la zona estable.
+
+En las primeras iteraciones baja muy rápido, igual que el greedy, pero este necesita muchas más iteraciones para estabilizarse. Otra de las apreciaciones es que siempre da una solución parecida, ya que en todas mejora de una forma regular.  Esto puede cambiar si le damos menos población, ya que nosotros le dimos una población bastante grande (2500).
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{Genetico(Valor).png}
+\centering
+\end{figure}
+
+Como este algoritmo es más sofisticado, hemos entrado más a fondo y hemos sacado el gráfico de abajo que es la media de resultados que nos da con 10 secuencias para cada opción, mientras cambiamos la población de $100$ a $2.400$ y las llamadas a la función de costo de $1.000$ a $1.000.000$ en cuatro pasos.
+
+Podemos apreciar que la población tampoco debe ser muy grande ya que no mejora casi a partir de una población de $400$, aunque es importante mirar que cuantas más veces llamemos mejor, aunque en la última no se haya mejorado mucho para el cambio que ha habido ($100.000 - 1.000.000$).
+
+Por lo que viendo este gráfico nos quedaríamos con una población de $400$ y $1.000.000$ de llamadas.
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{Genetico(Costo).png}
+\centering
+\end{figure}
+
+Como era de esperar, el tiempo de ejecución sube igual que suben las llamadas a la función de costo, pero podemos apreciar que cuando la población es baja no tarda mucho ya que hace menos combinaciones.
+
+\begin{figure}[H]
+\includegraphics[width=\textwidth]{Genetico(Tiempo).png}
+\centering
+\end{figure}
+
+\subsection{Camino Aleatorio:}
+
+Al sacar el camino aleatorio, vi que sería bueno si no escogiéramos caminos al azar puro y podríamos coger caminos mirando los valores que teníamos. Lo que hicimos fue dar importancia a los caminos con menor viaje con esta formula:
+
+$$Peso =  \frac{1}{distancia} $$
+
+Así la probabilidad de que saquemos caminos mejores es mayor, con lo que podemos ver que en una ejecución de 500 iteraciones ($java$ $-jar$ $practica7.jar$ $-checkAleatorio$ $-l$ $500$) mejora 600 unidades aunque tarde un poco más en sacarlo, pero consideramos que es una mejora importante.
+
+\begin{verbnobox}
+#########################################
+Comprobaremos si es mejor empezar con un aleatorio uniforme o sesgada:
+
+Aleatorio uniforme:
+         Distancia Media:	3111.03
+         Tiempo de ejecucion Medio:	0
+
+Aleatorio sesgado:
+         Distancia Media:	2465.89
+         Tiempo de ejecucion Medio:	9
+
+Para la selección de tipo de aleatoriedad nos basaremos en la distancia.
+         Elegimos aleatoriedad sesgada que tiene distancia más baja.
+Se ejecutará con aleatoriedad sesgada.
+#########################################
+\end{verbnobox}
 	
 \section{Valoración Subjetiva:}
-\textbf{Ieltzu}: Ha sido una práctica en la que no hemos invertido mucho tiempo. Los tres teníamos que haber estudiado los dos algoritmos, por lo tanto, no ha sido muy complicado implementarlo. Práctica interesante, pero en la época del año que nos ha pillado, para mi, sobraba.\\
-\textbf{Mikel}: 
+\textbf{Ieltzu}: Ha sido una práctica en la que no hemos invertido mucho tiempo. Los tres teníamos que haber estudiado los dos algoritmos, por lo tanto, no ha sido muy complicado implementarlo. Práctica interesante, pero en la época del año que nos ha pillado, para mi, sobraba.
+
+\textbf{Mikel}: Es una práctica diferente a las demás y en la que me he llevado varios mosqueo con la función de aleatoriedad sesgada, y a la hora de implementar los cruces, ya que cambiamos de método ya que no conseguíamos implementarlo. Pero además de eso es interesante ver las distintas maneras de optimización y analizarlas como funcionan.
 
 
-\textbf{Maria}:
+\textbf{Maria}: (No ha estado este periodo de tiempo, así que no lo ha echo.)
 
 
 
 \section*{Bibliografia}
 \begin{itemize}
-	\item http://www.herrera.unt.edu.ar/gapia/Curso_AG/Curso_AG_08_Clase_5.pdf
-	\item \\
+	\item http://www.herrera.unt.edu.ar/gapia/Curso\_AG/Curso\_AG\_08\_Clase\_5.pdf
 	\item http://www.sc.ehu.es/ccwbayes/docencia/mmcc/docs/t2geneticos.pdf
 \end{itemize}
 

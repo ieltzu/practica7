@@ -239,6 +239,13 @@ public class Tsp
     public void resetLlamadas(){
     	this.llamadas = 0;
     }
+    
+    public int numLlamadas(){
+    	return this.llamadas;
+    }
+    public void setMaximoLlamadas(int max){
+    	this.maximollamadas = max;
+    }
  
     // Main method
     public static void main(String[] args) throws Exception{
@@ -310,17 +317,25 @@ public class Tsp
         		caleat = false;
         	}
         }else{
-        	System.out.println("Utilizaremos muestras con una aleatoriedad sesgada.");
         	caleat=true;
+        }
+        
+        if (params.containsKey("-aleatorioNormal")) caleat = false;
+        if (params.containsKey("-aleatorioSesgado")) caleat = true;
+        
+        if (caleat){
+        	System.out.println("Se ejecutará con aleatoriedad sesgada.");
+        }else{
+        	System.out.println("Se ejecutará con aleatoriedad Uniforme.");
         }
         
         BusquedaLocal bl;
         Camino sol,best;
-        
+
         if (greedy){
         	System.out.println("\n#########################################");
         	System.out.println("Analizaremos como funciona el Greedy: ("+loops+" vueltas)");
-        	bl = new BusquedaLocal(BusquedaLocal.criterios.Greedy,T);
+        	bl = new BusquedaLocal(BusquedaLocal.criterios.Greedy,T,caleat);
             T.resetLlamadas();
             long tI, tM=0;
             double dm=0.0;
@@ -354,7 +369,7 @@ public class Tsp
         if (bestFirst){
         	System.out.println("\n#########################################");
         	System.out.println("Analizaremos como funciona el BestFirst: ("+loops+" vueltas)");
-        	bl = new BusquedaLocal(BusquedaLocal.criterios.BestFirst,T);
+        	bl = new BusquedaLocal(BusquedaLocal.criterios.BestFirst,T, caleat);
             T.resetLlamadas();
             long tI, tM=0;
             double dm=0.0;
@@ -388,7 +403,8 @@ public class Tsp
         if (genetic){
         	System.out.println("\n#########################################");
         	System.out.println("Analizaremos como funciona el GeneticAlgorithm: ("+loops+" vueltas)");
-        	GeneticAlgorithm ga = new GeneticAlgorithm(T, pobMax);
+        	System.out.println("\tLa población será de: "+pobMax);	
+        	GeneticAlgorithm ga = new GeneticAlgorithm(T, pobMax, caleat);
             T.resetLlamadas();
             long tI, tM=0;
             double dm=0.0;
@@ -412,6 +428,33 @@ public class Tsp
 				} catch (Exception e) {
 				}
 			}
+            
+//            for (int a = 100; a < 2500; a+=100) {
+//            	ga.setPoblacionMaxima(a);
+//            	for (int j = 1000; j <= 1000000; j*=10) {
+//            		T.setMaximoLlamadas(j);
+//            		tM=0;
+//            		dm=0.0;
+//            		for (int i = 0; i < loops; i++) {
+//                    	T.resetLlamadas();
+//                    	tI = System.currentTimeMillis();
+//                    	sol = ga.ejecutar();
+//                    	tM += (System.currentTimeMillis() - tI);
+//                    	try {
+//        					dm += sol.distancia();
+//        					if (best.distancia()>sol.distancia()){
+//        	            		best = sol;
+//        	            	}
+//        					//System.out.println(i+1+"\t"+sol.imprimir());
+//        				} catch (Exception e) {
+//        				}
+//        			}
+//            		System.out.print((int)(dm / loops)+"\t"+(int)(tM / loops)+"\t");
+//				}
+//				System.out.println();
+//			}
+            
+            
             System.out.println("\n\tSe tarda una media de " + (tM / loops) + "ms para ejecutarse cada GeneticAlgorithm.");
             System.out.println("\tLa media de distancia: " + (dm / loops));
             

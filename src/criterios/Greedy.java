@@ -12,8 +12,8 @@ public class Greedy  extends Criterios implements Criterio{
 	}
 	
 	@Override
-	public Camino evaluar(){
-		Camino ganadora = this.tsp.crearMuestraAleatoria(true);
+	public Camino evaluar(boolean tipo){
+		Camino ganadora = this.tsp.crearMuestraAleatoria(tipo);
 		Camino tmp;
 		do{
 			tmp = ganadora;

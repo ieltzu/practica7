@@ -7,5 +7,5 @@ import practica7.Tsp;
 
 public interface Criterio {
 	
-	public Camino evaluar();
+	public Camino evaluar(boolean tipo);
 }

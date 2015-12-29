@@ -9,18 +9,24 @@ public class GeneticAlgorithm {
 	
 	private Tsp tsp;
 	private int poblacionMaxima;
+	private boolean tipoPob;
 	
-	public GeneticAlgorithm(Tsp tsp, int pob) {
+	public GeneticAlgorithm(Tsp tsp, int pob, boolean tipo) {
 		this.tsp = tsp;
 		this.poblacionMaxima = pob;
+		this.tipoPob = tipo;
 	}
 
 	private Camino[] crearPopulacion() {
 		Camino[] pop = new Camino[this.poblacionMaxima];
 		for (int i = 0; i < this.poblacionMaxima; i++) {
-			pop[i] = tsp.crearMuestraAleatoria(true);
+			pop[i] = tsp.crearMuestraAleatoria(this.tipoPob);
 		}
 		return pop;
+	}
+	
+	public void setPoblacionMaxima(int pobMax){
+		this.poblacionMaxima = pobMax;
 	}
 	
 	private void mutaciones(Camino[] cruces) {

@@ -81,13 +81,13 @@ public class Camino implements Comparable {
 		try {
 			a = this.distancia();
 		} catch (Exception e) {
-			a=-1;
+			a=Double.MAX_VALUE;
 		}
 		double b;
 		try {
 			b = ((Camino) o).distancia();
 		} catch (Exception e) {
-			b = -1;
+			b = Double.MAX_VALUE;
 		}
 		if (a==b) return 0;
 		return (a<b)?-1:1;
