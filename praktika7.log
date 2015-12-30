@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.6)  30 DEC 2015 17:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.10.6)  30 DEC 2015 17:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -357,78 +357,73 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-LaTeX Font Info:    Try loading font information for U+msa on input line 31.
+LaTeX Font Info:    Try loading font information for U+msa on input line 29.
  (/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 31.
+LaTeX Font Info:    Try loading font information for U+msb on input line 29.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 31.
-
-(/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/omscmr.fd
-File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 31.
-LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <6> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 31.
- [1
+) [1
 
 {/usr/local/texlive/2015basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 88--89
+Underfull \hbox (badness 10000) in paragraph at lines 86--87
 
  []
 
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 90.
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 92.
-[2] <Greedy.png, id=20, 1099.4676pt x 607.068pt>
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 90.
+ [2]
+<Greedy.png, id=18, 1099.4676pt x 607.068pt>
 File: Greedy.png Graphic file (type png)
  <use Greedy.png>
-Package pdftex.def Info: Greedy.png used on input line 212.
+Package pdftex.def Info: Greedy.png used on input line 210.
 (pdftex.def)             Requested size: 525.23788pt x 290.00912pt.
  [3]
-<BestFirst(tiempo).png, id=26, 566.5968pt x 378.213pt>
+<BestFirst(tiempo).png, id=24, 566.5968pt x 378.213pt>
 File: BestFirst(tiempo).png Graphic file (type png)
 
 <use BestFirst(tiempo).png>
-Package pdftex.def Info: BestFirst(tiempo).png used on input line 221.
+Package pdftex.def Info: BestFirst(tiempo).png used on input line 219.
 (pdftex.def)             Requested size: 367.6649pt x 245.42001pt.
 
-<BestFirst(Valor).png, id=27, 1059.4782pt x 540.5796pt>
+<BestFirst(Valor).png, id=25, 1059.4782pt x 540.5796pt>
 File: BestFirst(Valor).png Graphic file (type png)
 
 <use BestFirst(Valor).png>
-Package pdftex.def Info: BestFirst(Valor).png used on input line 230.
+Package pdftex.def Info: BestFirst(Valor).png used on input line 228.
 (pdftex.def)             Requested size: 525.23788pt x 267.99603pt.
  [4 <./Greedy.png> <./BestFirst(tiempo).png>]
-<BestFirst(Llamadas).png, id=33, 1081.1592pt x 654.2844pt>
+<BestFirst(Llamadas).png, id=31, 1081.1592pt x 654.2844pt>
 File: BestFirst(Llamadas).png Graphic file (type png)
 
 <use BestFirst(Llamadas).png>
-Package pdftex.def Info: BestFirst(Llamadas).png used on input line 239.
+Package pdftex.def Info: BestFirst(Llamadas).png used on input line 237.
 (pdftex.def)             Requested size: 525.23788pt x 317.86665pt.
  [5 <./BestFirst(Valor).png> <./BestFirst(Llamadas).png>] <Genetico(Valor).png,
- id=39, 1232.4444pt x 596.9502pt>
+ id=37, 1232.4444pt x 596.9502pt>
 File: Genetico(Valor).png Graphic file (type png)
 
 <use Genetico(Valor).png>
-Package pdftex.def Info: Genetico(Valor).png used on input line 254.
+Package pdftex.def Info: Genetico(Valor).png used on input line 252.
 (pdftex.def)             Requested size: 525.23788pt x 254.4064pt.
- <Genetico(Costo).png, id=40, 756.426pt x 503.481pt>
+ <Genetico(Costo).png, id=38, 756.426pt x 503.481pt>
 File: Genetico(Costo).png Graphic file (type png)
 
 <use Genetico(Costo).png>
-Package pdftex.def Info: Genetico(Costo).png used on input line 265.
+Package pdftex.def Info: Genetico(Costo).png used on input line 263.
 (pdftex.def)             Requested size: 525.23788pt x 349.6225pt.
  [6 <./Genetico(Valor).png>]
-<Genetico(Tiempo).png, id=45, 756.426pt x 503.481pt>
+<Genetico(Tiempo).png, id=43, 756.426pt x 503.481pt>
 File: Genetico(Tiempo).png Graphic file (type png)
 
 <use Genetico(Tiempo).png>
-Package pdftex.def Info: Genetico(Tiempo).png used on input line 272.
+Package pdftex.def Info: Genetico(Tiempo).png used on input line 270.
 (pdftex.def)             Requested size: 525.23788pt x 349.6225pt.
  [7 <./Genetico(Costo).png> <./Genetico(Tiempo).png>] [8] (./praktika7.aux) )
 (\end occurred inside a group at level 1)
@@ -436,13 +431,13 @@ Package pdftex.def Info: Genetico(Tiempo).png used on input line 272.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 4294 strings out of 494501
- 62965 string characters out of 6167030
+ 4291 strings out of 494501
+ 62915 string characters out of 6167030
  146616 words of memory out of 5000000
- 7487 multiletter control sequences out of 15000+600000
+ 7484 multiletter control sequences out of 15000+600000
  12651 words of font info for 50 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 38i,13n,32p,809b,1955s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 38i,13n,32p,809b,1957s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmbx10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/pu
@@ -451,15 +446,13 @@ blic/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type
 ype1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015basic/texmf-dist/font
 s/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2015basic/texmf-dist/f
 onts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015basic/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2015basic/texmf
--dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2015basic/te
-xmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2015basi
-c/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2015
-basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
-Output written on praktika7.pdf (8 pages, 2566469 bytes).
+st/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2015basic/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2015basic/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmtt9.pfb>
+Output written on praktika7.pdf (8 pages, 2555189 bytes).
 PDF statistics:
- 94 PDF objects out of 1000 (max. 8388607)
- 57 compressed objects within 1 object stream
+ 86 PDF objects out of 1000 (max. 8388607)
+ 51 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  36 words of extra memory for PDF output out of 10000 (max. 10000000)
 
