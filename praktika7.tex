@@ -298,6 +298,8 @@ Para la selección de tipo de aleatoriedad nos basaremos en la distancia.
 Se ejecutará con aleatoriedad sesgada.
 #########################################
 \end{verbnobox}
+
+Hay que mencionar que tanto para el Greedy como para el BestFirst, utilizar un camino aleatorio sesgado es favorable en todos los sentidos, ya que solo se usa una vez y el tiempo de ejecución es insignificante para este caso. Por otro lado, en el Algoritmo Genético, como se ejecutan tantas veces como el número de población, ya que se utiliza para iniciar la población, se nota en tiempo si se está utilizando un algoritmo u otro. Por eso, ya que con este algoritmo los resultados conseguidos son muy parecidos ($774$ sesgando frente a $779$ con aleatoriedad uniforme (ejecutando $100$ veces con una población de $500$)), proponemos que este algoritmo se utilice con una aleatoriedad uniforme.
 	
 \section{Valoración Subjetiva:}
 \textbf{Ieltzu}: Ha sido una práctica en la que no hemos invertido mucho tiempo. Los tres teníamos que haber estudiado los dos algoritmos, por lo tanto, no ha sido muy complicado implementarlo. Práctica interesante, pero en la época del año que nos ha pillado, para mi, sobraba.
